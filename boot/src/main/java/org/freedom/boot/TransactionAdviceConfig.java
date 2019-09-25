@@ -30,9 +30,11 @@ public class TransactionAdviceConfig {
         @Bean
         public TransactionInterceptor txAdvice() {
 
+        	//默认传播行为
             DefaultTransactionAttribute txAttr_REQUIRED = new DefaultTransactionAttribute();
             txAttr_REQUIRED.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
 
+            //默认传播行为，只读
             DefaultTransactionAttribute txAttr_REQUIRED_READONLY = new DefaultTransactionAttribute();
             txAttr_REQUIRED_READONLY.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
             txAttr_REQUIRED_READONLY.setReadOnly(true);

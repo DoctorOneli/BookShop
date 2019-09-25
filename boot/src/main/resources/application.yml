@@ -16,9 +16,19 @@ spring:
 #静态资源的访问配置
   mvc:
     static-path-pattern: /public/**
+    throw-exception-if-no-handler-found: true
     
   resources:
     static-locations: classpath\:/public/
+    add-mappings: false
+
+#配置返回json格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss 
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false  
+ 
 
 
 #数据库连接配置

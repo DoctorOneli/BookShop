@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import org.freedom.boot.bean.Order;
 import org.freedom.boot.bean.OrderExample;
 
-@Mapper
 public interface OrderMapper {
     long countByExample(OrderExample example);
 
@@ -22,6 +21,8 @@ public interface OrderMapper {
     List<Order> selectByExampleWithBLOBs(OrderExample example);
 
     List<Order> selectByExample(OrderExample example);
+    
+    List<Order> selectByExampleWithAll(OrderExample example);
 
     Order selectByPrimaryKey(Integer orderId);
 

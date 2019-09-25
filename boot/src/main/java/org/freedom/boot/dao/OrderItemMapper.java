@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import org.freedom.boot.bean.OrderItem;
 import org.freedom.boot.bean.OrderItemExample;
 
-@Mapper
 public interface OrderItemMapper {
     long countByExample(OrderItemExample example);
 

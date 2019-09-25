@@ -8,7 +8,6 @@ import org.freedom.boot.bean.Book;
 import org.freedom.boot.bean.BookExample;
 import org.freedom.boot.bean.BookWithBLOBs;
 
-@Mapper
 public interface BookMapper {
     long countByExample(BookExample example);
 

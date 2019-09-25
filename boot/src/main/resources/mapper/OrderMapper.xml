@@ -13,6 +13,29 @@
 		type="org.freedom.boot.bean.Order">
 		<result column="remark" jdbcType="LONGVARCHAR" property="remark" />
 	</resultMap>
+
+	<resultMap id="AllResultMap" type="org.freedom.boot.bean.Order">
+		<id column="order_id" jdbcType="INTEGER" property="orderId" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="order_state_id" jdbcType="INTEGER" property="orderStateId" />
+		<result column="address_id" jdbcType="INTEGER" property="addressId" />
+		<result column="flag" jdbcType="BIT" property="flag" />
+		<collection property="orderItem" column="order_id"
+			ofType="org.freedom.boot.bean.OrderItem">
+			<id column="order_item_id" property="orderItemId" />
+			<result column="count" property="count" />
+			<result column="price" property="price" />
+			<association property="book" column="book_id"
+				javaType="org.freedom.boot.bean.BookWithBLOBs">
+				<id column="book_id" property="bookId" />
+				<result column="book_name" property="bookName" />
+				<result column="book_author" property="bookAuthor" />
+				<result column="book_img" property="bookImg" />
+				<result column="book_cover" property="bookCover" />
+			</association>
+		</collection>
+	</resultMap>
+
 	<sql id="Example_Where_Clause">
 		<where>
 			<foreach collection="oredCriteria" item="criteria" separator="or">
@@ -27,7 +50,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -59,7 +83,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -77,11 +102,65 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		order_id, create_time, order_state_id, user_id, address_id, flag
+		order_id, create_time, order_state_id, user_id, address_id,
+		flag
 	</sql>
 	<sql id="Blob_Column_List">
 		remark
 	</sql>
+
+	<sql id="All_Column_List">
+		`tp_order_item`.`order_item_id` AS `order_item_id`,
+		`tp_order`.`order_id` AS `order_id`,
+		`tp_order`.`create_time` AS
+		`create_time`,
+		`tp_order`.`order_state_id` AS `order_state_id`,
+		`tp_order_item`.`count` AS `count`,
+		`tp_order_item`.`price` AS `price`,
+		`tp_order_item`.`book_id` AS `book_id`,
+		`tp_order`.`flag` AS `flag`,
+		`tp_book`.`book_name` AS
+		`book_name`,
+		`tp_book`.`book_author` AS
+		`book_author`,
+		`tp_book`.`book_img` AS `book_img`,
+		`tp_order`.`address_id` AS
+		`address_id`,
+		`tp_address`.`concrete_address` AS `concrete_address`,
+		`tp_book`.`book_cover` AS `book_cover`
+	</sql>
+
+
+
+
+	<select id="selectByExampleWithAll" parameterType="org.freedom.boot.bean.OrderExample"
+		resultMap="AllResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="All_Column_List" />
+		FROM
+		(
+		(
+		( `tp_order` JOIN `tp_order_item` ON ( (
+		`tp_order_item`.`order_id` =
+		`tp_order`.`order_id` ) ) )
+		JOIN `tp_book`
+		ON ( ( `tp_order_item`.`book_id` = `tp_book`.`book_id` ) )
+		)
+		JOIN
+		`tp_address` ON ( ( `tp_order`.`address_id` =
+		`tp_address`.`address_id` ) )
+		)
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+
 	<select id="selectByExampleWithBLOBs" parameterType="org.freedom.boot.bean.OrderExample"
 		resultMap="ResultMapWithBLOBs">
 		select
@@ -124,7 +203,8 @@
 		where order_id = #{orderId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from tp_order
+		delete from
+		tp_order
 		where order_id = #{orderId,jdbcType=INTEGER}
 	</delete>
 	<delete id="deleteByExample" parameterType="org.freedom.boot.bean.OrderExample">
@@ -134,12 +214,15 @@
 		</if>
 	</delete>
 	<insert id="insert" parameterType="org.freedom.boot.bean.Order">
-		insert into tp_order (order_id, create_time, order_state_id,
+		insert into tp_order
+		(order_id, create_time, order_state_id,
 		user_id, address_id, flag,
 		remark)
-		values (#{orderId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+		values (#{orderId,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP},
 		#{orderStateId,jdbcType=INTEGER},
-		#{userId,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER}, #{flag,jdbcType=BIT},
+		#{userId,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER},
+		#{flag,jdbcType=BIT},
 		#{remark,jdbcType=LONGVARCHAR})
 	</insert>
 	<insert id="insertSelective" useGeneratedKeys="true" keyColumn="order_id"
@@ -232,11 +315,16 @@
 		update tp_order
 		set order_id = #{record.orderId,jdbcType=INTEGER},
 		create_time = #{record.createTime,jdbcType=TIMESTAMP},
-		order_state_id = #{record.orderStateId,jdbcType=INTEGER},
-		user_id = #{record.userId,jdbcType=INTEGER},
-		address_id = #{record.addressId,jdbcType=INTEGER},
-		flag = #{record.flag,jdbcType=BIT},
-		remark = #{record.remark,jdbcType=LONGVARCHAR}
+		order_state_id =
+		#{record.orderStateId,jdbcType=INTEGER},
+		user_id =
+		#{record.userId,jdbcType=INTEGER},
+		address_id =
+		#{record.addressId,jdbcType=INTEGER},
+		flag =
+		#{record.flag,jdbcType=BIT},
+		remark =
+		#{record.remark,jdbcType=LONGVARCHAR}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -245,10 +333,14 @@
 		update tp_order
 		set order_id = #{record.orderId,jdbcType=INTEGER},
 		create_time = #{record.createTime,jdbcType=TIMESTAMP},
-		order_state_id = #{record.orderStateId,jdbcType=INTEGER},
-		user_id = #{record.userId,jdbcType=INTEGER},
-		address_id = #{record.addressId,jdbcType=INTEGER},
-		flag = #{record.flag,jdbcType=BIT}
+		order_state_id =
+		#{record.orderStateId,jdbcType=INTEGER},
+		user_id =
+		#{record.userId,jdbcType=INTEGER},
+		address_id =
+		#{record.addressId,jdbcType=INTEGER},
+		flag =
+		#{record.flag,jdbcType=BIT}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -278,10 +370,12 @@
 		where order_id = #{orderId,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKeyWithBLOBs" parameterType="org.freedom.boot.bean.Order">
-		update tp_order
+		update
+		tp_order
 		set create_time = #{createTime,jdbcType=TIMESTAMP},
 		order_state_id = #{orderStateId,jdbcType=INTEGER},
-		user_id = #{userId,jdbcType=INTEGER},
+		user_id =
+		#{userId,jdbcType=INTEGER},
 		address_id = #{addressId,jdbcType=INTEGER},
 		flag = #{flag,jdbcType=BIT},
 		remark = #{remark,jdbcType=LONGVARCHAR}
@@ -290,7 +384,8 @@
 	<update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.Order">
 		update tp_order
 		set create_time = #{createTime,jdbcType=TIMESTAMP},
-		order_state_id = #{orderStateId,jdbcType=INTEGER},
+		order_state_id =
+		#{orderStateId,jdbcType=INTEGER},
 		user_id = #{userId,jdbcType=INTEGER},
 		address_id = #{addressId,jdbcType=INTEGER},
 		flag = #{flag,jdbcType=BIT}
