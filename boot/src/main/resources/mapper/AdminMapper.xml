@@ -74,7 +74,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_admin
+    from tbl_admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,27 +85,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_admin
+    from tbl_admin
     where admin_id = #{adminId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_admin
+    delete from tbl_admin
     where admin_id = #{adminId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.AdminExample">
-    delete from tp_admin
+    delete from tbl_admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.Admin">
-    insert into tp_admin (admin_id, pwd, name, 
+    insert into tbl_admin (admin_id, pwd, name, 
       gender)
     values (#{adminId,jdbcType=INTEGER}, #{pwd,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{gender,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.Admin">
-    insert into tp_admin
+    insert into tbl_admin
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="adminId != null">
         admin_id,
@@ -136,13 +136,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.AdminExample" resultType="java.lang.Long">
-    select count(*) from tp_admin
+    select count(*) from tbl_admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_admin
+    update tbl_admin
     <set>
       <if test="record.adminId != null">
         admin_id = #{record.adminId,jdbcType=INTEGER},
@@ -162,7 +162,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_admin
+    update tbl_admin
     set admin_id = #{record.adminId,jdbcType=INTEGER},
       pwd = #{record.pwd,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
@@ -172,7 +172,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.Admin">
-    update tp_admin
+    update tbl_admin
     <set>
       <if test="pwd != null">
         pwd = #{pwd,jdbcType=VARCHAR},
@@ -187,7 +187,7 @@
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.Admin">
-    update tp_admin
+    update tbl_admin
     set pwd = #{pwd,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=VARCHAR}

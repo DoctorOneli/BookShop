@@ -75,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_order_item
+    from tbl_order_item
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,27 +86,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_order_item
+    from tbl_order_item
     where order_item_id = #{orderItemId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_order_item
+    delete from tbl_order_item
     where order_item_id = #{orderItemId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.OrderItemExample">
-    delete from tp_order_item
+    delete from tbl_order_item
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.OrderItem">
-    insert into tp_order_item (order_item_id, order_id, book_id, 
+    insert into tbl_order_item (order_item_id, order_id, book_id, 
       count, price)
     values (#{orderItemId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, 
       #{count,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.OrderItem">
-    insert into tp_order_item
+    insert into tbl_order_item
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderItemId != null">
         order_item_id,
@@ -143,13 +143,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.OrderItemExample" resultType="java.lang.Long">
-    select count(*) from tp_order_item
+    select count(*) from tbl_order_item
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_order_item
+    update tbl_order_item
     <set>
       <if test="record.orderItemId != null">
         order_item_id = #{record.orderItemId,jdbcType=INTEGER},
@@ -172,7 +172,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_order_item
+    update tbl_order_item
     set order_item_id = #{record.orderItemId,jdbcType=INTEGER},
       order_id = #{record.orderId,jdbcType=INTEGER},
       book_id = #{record.bookId,jdbcType=INTEGER},
@@ -183,7 +183,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.OrderItem">
-    update tp_order_item
+    update tbl_order_item
     <set>
       <if test="orderId != null">
         order_id = #{orderId,jdbcType=INTEGER},
@@ -201,7 +201,7 @@
     where order_item_id = #{orderItemId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.OrderItem">
-    update tp_order_item
+    update tbl_order_item
     set order_id = #{orderId,jdbcType=INTEGER},
       book_id = #{bookId,jdbcType=INTEGER},
       count = #{count,jdbcType=INTEGER},

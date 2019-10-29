@@ -89,7 +89,7 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from tp_user
+    from tbl_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -103,7 +103,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_user
+    from tbl_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -116,21 +116,21 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from tp_user
+    from tbl_user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_user
+    delete from tbl_user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.UserExample">
-    delete from tp_user
+    delete from tbl_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.User">
-    insert into tp_user (user_id, nick_name, avatar_url, 
+    insert into tbl_user (user_id, nick_name, avatar_url, 
       gender, province, city, 
       country, language, login_time, 
       open_id, head_img)
@@ -140,7 +140,7 @@
       #{openId,jdbcType=VARCHAR}, #{headImg,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.User">
-    insert into tp_user
+    insert into tbl_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
         user_id,
@@ -213,13 +213,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.UserExample" resultType="java.lang.Long">
-    select count(*) from tp_user
+    select count(*) from tbl_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_user
+    update tbl_user
     <set>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
@@ -260,7 +260,7 @@
     </if>
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
-    update tp_user
+    update tbl_user
     set user_id = #{record.userId,jdbcType=INTEGER},
       nick_name = #{record.nickName,jdbcType=VARCHAR},
       avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
@@ -277,7 +277,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_user
+    update tbl_user
     set user_id = #{record.userId,jdbcType=INTEGER},
       nick_name = #{record.nickName,jdbcType=VARCHAR},
       avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
@@ -293,7 +293,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.User">
-    update tp_user
+    update tbl_user
     <set>
       <if test="nickName != null">
         nick_name = #{nickName,jdbcType=VARCHAR},
@@ -329,7 +329,7 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.freedom.boot.bean.User">
-    update tp_user
+    update tbl_user
     set nick_name = #{nickName,jdbcType=VARCHAR},
       avatar_url = #{avatarUrl,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=INTEGER},
@@ -343,7 +343,7 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.User">
-    update tp_user
+    update tbl_user
     set nick_name = #{nickName,jdbcType=VARCHAR},
       avatar_url = #{avatarUrl,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=INTEGER},

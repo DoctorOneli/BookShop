@@ -74,7 +74,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_power
+    from tbl_power
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,27 +85,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_power
+    from tbl_power
     where power_id = #{powerId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_power
+    delete from tbl_power
     where power_id = #{powerId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.PowerExample">
-    delete from tp_power
+    delete from tbl_power
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.Power">
-    insert into tp_power (power_id, name, controller, 
+    insert into tbl_power (power_id, name, controller, 
       action)
     values (#{powerId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{controller,jdbcType=VARCHAR}, 
       #{action,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.Power">
-    insert into tp_power
+    insert into tbl_power
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="powerId != null">
         power_id,
@@ -136,13 +136,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.PowerExample" resultType="java.lang.Long">
-    select count(*) from tp_power
+    select count(*) from tbl_power
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_power
+    update tbl_power
     <set>
       <if test="record.powerId != null">
         power_id = #{record.powerId,jdbcType=INTEGER},
@@ -162,7 +162,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_power
+    update tbl_power
     set power_id = #{record.powerId,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       controller = #{record.controller,jdbcType=VARCHAR},
@@ -172,7 +172,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.Power">
-    update tp_power
+    update tbl_power
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -187,7 +187,7 @@
     where power_id = #{powerId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.Power">
-    update tp_power
+    update tbl_power
     set name = #{name,jdbcType=VARCHAR},
       controller = #{controller,jdbcType=VARCHAR},
       action = #{action,jdbcType=VARCHAR}

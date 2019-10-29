@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_address
+    from tbl_address
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,21 +93,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_address
+    from tbl_address
     where address_id = #{addressId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_address
+    delete from tbl_address
     where address_id = #{addressId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.AddressExample">
-    delete from tp_address
+    delete from tbl_address
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.Address">
-    insert into tp_address (address_id, user_id, if_default, 
+    insert into tbl_address (address_id, user_id, if_default, 
       receiver_name, receiver_phone, area_id, 
       concrete_address, province, city, 
       area, flag)
@@ -117,7 +117,7 @@
       #{area,jdbcType=VARCHAR}, #{flag,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.Address">
-    insert into tp_address
+    insert into tbl_address
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="addressId != null">
         address_id,
@@ -190,13 +190,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.AddressExample" resultType="java.lang.Long">
-    select count(*) from tp_address
+    select count(*) from tbl_address
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_address
+    update tbl_address
     <set>
       <if test="record.addressId != null">
         address_id = #{record.addressId,jdbcType=INTEGER},
@@ -237,7 +237,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_address
+    update tbl_address
     set address_id = #{record.addressId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       if_default = #{record.ifDefault,jdbcType=INTEGER},
@@ -254,7 +254,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.Address">
-    update tp_address
+    update tbl_address
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
@@ -290,7 +290,7 @@
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.Address">
-    update tp_address
+    update tbl_address
     set user_id = #{userId,jdbcType=INTEGER},
       if_default = #{ifDefault,jdbcType=INTEGER},
       receiver_name = #{receiverName,jdbcType=VARCHAR},

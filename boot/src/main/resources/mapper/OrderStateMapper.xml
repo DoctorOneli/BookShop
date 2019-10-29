@@ -72,7 +72,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_order_state
+    from tbl_order_state
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,25 +83,25 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_order_state
+    from tbl_order_state
     where order_state_id = #{orderStateId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_order_state
+    delete from tbl_order_state
     where order_state_id = #{orderStateId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.OrderStateExample">
-    delete from tp_order_state
+    delete from tbl_order_state
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.OrderState">
-    insert into tp_order_state (order_state_id, name)
+    insert into tbl_order_state (order_state_id, name)
     values (#{orderStateId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.OrderState">
-    insert into tp_order_state
+    insert into tbl_order_state
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderStateId != null">
         order_state_id,
@@ -120,13 +120,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.OrderStateExample" resultType="java.lang.Long">
-    select count(*) from tp_order_state
+    select count(*) from tbl_order_state
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_order_state
+    update tbl_order_state
     <set>
       <if test="record.orderStateId != null">
         order_state_id = #{record.orderStateId,jdbcType=INTEGER},
@@ -140,7 +140,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_order_state
+    update tbl_order_state
     set order_state_id = #{record.orderStateId,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -148,7 +148,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.OrderState">
-    update tp_order_state
+    update tbl_order_state
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -157,7 +157,7 @@
     where order_state_id = #{orderStateId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.OrderState">
-    update tp_order_state
+    update tbl_order_state
     set name = #{name,jdbcType=VARCHAR}
     where order_state_id = #{orderStateId,jdbcType=INTEGER}
   </update>

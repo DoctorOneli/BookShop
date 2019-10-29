@@ -106,132 +106,132 @@ public class BookExample {
         }
 
         public Criteria andBookIdIsNull() {
-            addCriterion("book_id is null");
+            addCriterion("tbl_book.book_id is null");
             return (Criteria) this;
         }
 
         public Criteria andBookIdIsNotNull() {
-            addCriterion("book_id is not null");
+            addCriterion("tbl_book.book_id is not null");
             return (Criteria) this;
         }
 
         public Criteria andBookIdEqualTo(Integer value) {
-            addCriterion("book_id =", value, "bookId");
+            addCriterion("tbl_book.book_id =", value, "bookId");
             return (Criteria) this;
         }
 
         public Criteria andBookIdNotEqualTo(Integer value) {
-            addCriterion("book_id <>", value, "bookId");
+            addCriterion("tbl_book.book_id <>", value, "bookId");
             return (Criteria) this;
         }
 
         public Criteria andBookIdGreaterThan(Integer value) {
-            addCriterion("book_id >", value, "bookId");
+            addCriterion("tbl_book.book_id >", value, "bookId");
             return (Criteria) this;
         }
 
         public Criteria andBookIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("book_id >=", value, "bookId");
+            addCriterion("tbl_book.book_id >=", value, "bookId");
             return (Criteria) this;
         }
 
         public Criteria andBookIdLessThan(Integer value) {
-            addCriterion("book_id <", value, "bookId");
+            addCriterion("tbl_book.book_id <", value, "bookId");
             return (Criteria) this;
         }
 
         public Criteria andBookIdLessThanOrEqualTo(Integer value) {
-            addCriterion("book_id <=", value, "bookId");
+            addCriterion("tbl_book.book_id <=", value, "bookId");
             return (Criteria) this;
         }
 
         public Criteria andBookIdIn(List<Integer> values) {
-            addCriterion("book_id in", values, "bookId");
+            addCriterion("tbl_book.book_id in", values, "bookId");
             return (Criteria) this;
         }
 
         public Criteria andBookIdNotIn(List<Integer> values) {
-            addCriterion("book_id not in", values, "bookId");
+            addCriterion("tbl_book.book_id not in", values, "bookId");
             return (Criteria) this;
         }
 
         public Criteria andBookIdBetween(Integer value1, Integer value2) {
-            addCriterion("book_id between", value1, value2, "bookId");
+            addCriterion("tbl_book.book_id between", value1, value2, "bookId");
             return (Criteria) this;
         }
 
         public Criteria andBookIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("book_id not between", value1, value2, "bookId");
+            addCriterion("tbl_book.book_id not between", value1, value2, "bookId");
             return (Criteria) this;
         }
 
         public Criteria andBookNameIsNull() {
-            addCriterion("book_name is null");
+            addCriterion("tbl_book.book_name is null");
             return (Criteria) this;
         }
 
         public Criteria andBookNameIsNotNull() {
-            addCriterion("book_name is not null");
+            addCriterion("tbl_book.book_name is not null");
             return (Criteria) this;
         }
 
         public Criteria andBookNameEqualTo(String value) {
-            addCriterion("book_name =", value, "bookName");
+            addCriterion("tbl_book.book_name =", value, "bookName");
             return (Criteria) this;
         }
 
         public Criteria andBookNameNotEqualTo(String value) {
-            addCriterion("book_name <>", value, "bookName");
+            addCriterion("tbl_book.book_name <>", value, "bookName");
             return (Criteria) this;
         }
 
         public Criteria andBookNameGreaterThan(String value) {
-            addCriterion("book_name >", value, "bookName");
+            addCriterion("tbl_book.book_name >", value, "bookName");
             return (Criteria) this;
         }
 
         public Criteria andBookNameGreaterThanOrEqualTo(String value) {
-            addCriterion("book_name >=", value, "bookName");
+            addCriterion("tbl_book.book_name >=", value, "bookName");
             return (Criteria) this;
         }
 
         public Criteria andBookNameLessThan(String value) {
-            addCriterion("book_name <", value, "bookName");
+            addCriterion("tbl_book.book_name <", value, "bookName");
             return (Criteria) this;
         }
 
         public Criteria andBookNameLessThanOrEqualTo(String value) {
-            addCriterion("book_name <=", value, "bookName");
+            addCriterion("tbl_book.book_name <=", value, "bookName");
             return (Criteria) this;
         }
 
         public Criteria andBookNameLike(String value) {
-            addCriterion("book_name like", value, "bookName");
+            addCriterion("tbl_book.book_name like", value, "bookName");
             return (Criteria) this;
         }
 
         public Criteria andBookNameNotLike(String value) {
-            addCriterion("book_name not like", value, "bookName");
+            addCriterion("tbl_book.book_name not like", value, "bookName");
             return (Criteria) this;
         }
 
         public Criteria andBookNameIn(List<String> values) {
-            addCriterion("book_name in", values, "bookName");
+            addCriterion("tbl_book.book_name in", values, "bookName");
             return (Criteria) this;
         }
 
         public Criteria andBookNameNotIn(List<String> values) {
-            addCriterion("book_name not in", values, "bookName");
+            addCriterion("tbl_book.book_name not in", values, "bookName");
             return (Criteria) this;
         }
 
         public Criteria andBookNameBetween(String value1, String value2) {
-            addCriterion("book_name between", value1, value2, "bookName");
+            addCriterion("tbl_book.book_name between", value1, value2, "bookName");
             return (Criteria) this;
         }
 
         public Criteria andBookNameNotBetween(String value1, String value2) {
-            addCriterion("book_name not between", value1, value2, "bookName");
+            addCriterion("tbl_book.book_name not between", value1, value2, "bookName");
             return (Criteria) this;
         }
 
@@ -296,62 +296,62 @@ public class BookExample {
         }
 
         public Criteria andBookTypeIdIsNull() {
-            addCriterion("book_type_id is null");
+            addCriterion("tbl_book.book_type_id is null");
             return (Criteria) this;
         }
 
         public Criteria andBookTypeIdIsNotNull() {
-            addCriterion("book_type_id is not null");
+            addCriterion("tbl_book.book_type_id is not null");
             return (Criteria) this;
         }
 
         public Criteria andBookTypeIdEqualTo(Integer value) {
-            addCriterion("book_type_id =", value, "bookTypeId");
+            addCriterion("tbl_book.book_type_id =", value, "bookTypeId");
             return (Criteria) this;
         }
 
         public Criteria andBookTypeIdNotEqualTo(Integer value) {
-            addCriterion("book_type_id <>", value, "bookTypeId");
+            addCriterion("tbl_book.book_type_id <>", value, "bookTypeId");
             return (Criteria) this;
         }
 
         public Criteria andBookTypeIdGreaterThan(Integer value) {
-            addCriterion("book_type_id >", value, "bookTypeId");
+            addCriterion("tbl_book.book_type_id >", value, "bookTypeId");
             return (Criteria) this;
         }
 
         public Criteria andBookTypeIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("book_type_id >=", value, "bookTypeId");
+            addCriterion("tbl_book.book_type_id >=", value, "bookTypeId");
             return (Criteria) this;
         }
 
         public Criteria andBookTypeIdLessThan(Integer value) {
-            addCriterion("book_type_id <", value, "bookTypeId");
+            addCriterion("tbl_book.book_type_id <", value, "bookTypeId");
             return (Criteria) this;
         }
 
         public Criteria andBookTypeIdLessThanOrEqualTo(Integer value) {
-            addCriterion("book_type_id <=", value, "bookTypeId");
+            addCriterion("tbl_book.book_type_id <=", value, "bookTypeId");
             return (Criteria) this;
         }
 
         public Criteria andBookTypeIdIn(List<Integer> values) {
-            addCriterion("book_type_id in", values, "bookTypeId");
+            addCriterion("tbl_book.book_type_id in", values, "bookTypeId");
             return (Criteria) this;
         }
 
         public Criteria andBookTypeIdNotIn(List<Integer> values) {
-            addCriterion("book_type_id not in", values, "bookTypeId");
+            addCriterion("tbl_book.book_type_id not in", values, "bookTypeId");
             return (Criteria) this;
         }
 
         public Criteria andBookTypeIdBetween(Integer value1, Integer value2) {
-            addCriterion("book_type_id between", value1, value2, "bookTypeId");
+            addCriterion("tbl_book.book_type_id between", value1, value2, "bookTypeId");
             return (Criteria) this;
         }
 
         public Criteria andBookTypeIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("book_type_id not between", value1, value2, "bookTypeId");
+            addCriterion("tbl_book.book_type_id not between", value1, value2, "bookTypeId");
             return (Criteria) this;
         }
 

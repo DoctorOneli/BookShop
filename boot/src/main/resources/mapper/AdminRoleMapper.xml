@@ -73,7 +73,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_admin_role
+    from tbl_admin_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,27 +84,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_admin_role
+    from tbl_admin_role
     where user_role_id = #{userRoleId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_admin_role
+    delete from tbl_admin_role
     where user_role_id = #{userRoleId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.AdminRoleExample">
-    delete from tp_admin_role
+    delete from tbl_admin_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.AdminRole">
-    insert into tp_admin_role (user_role_id, admin_id, role_id
+    insert into tbl_admin_role (user_role_id, admin_id, role_id
       )
     values (#{userRoleId,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.AdminRole">
-    insert into tp_admin_role
+    insert into tbl_admin_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userRoleId != null">
         user_role_id,
@@ -129,13 +129,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.AdminRoleExample" resultType="java.lang.Long">
-    select count(*) from tp_admin_role
+    select count(*) from tbl_admin_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_admin_role
+    update tbl_admin_role
     <set>
       <if test="record.userRoleId != null">
         user_role_id = #{record.userRoleId,jdbcType=INTEGER},
@@ -152,7 +152,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_admin_role
+    update tbl_admin_role
     set user_role_id = #{record.userRoleId,jdbcType=INTEGER},
       admin_id = #{record.adminId,jdbcType=INTEGER},
       role_id = #{record.roleId,jdbcType=INTEGER}
@@ -161,7 +161,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.AdminRole">
-    update tp_admin_role
+    update tbl_admin_role
     <set>
       <if test="adminId != null">
         admin_id = #{adminId,jdbcType=INTEGER},
@@ -173,7 +173,7 @@
     where user_role_id = #{userRoleId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.AdminRole">
-    update tp_admin_role
+    update tbl_admin_role
     set admin_id = #{adminId,jdbcType=INTEGER},
       role_id = #{roleId,jdbcType=INTEGER}
     where user_role_id = #{userRoleId,jdbcType=INTEGER}

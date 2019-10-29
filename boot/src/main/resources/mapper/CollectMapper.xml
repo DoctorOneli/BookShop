@@ -74,7 +74,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_collect
+    from tbl_collect
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,35 +85,35 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_collect
+    from tbl_collect
     where collect_id = #{collectId,jdbcType=INTEGER}
   </select>
   
     <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_collect
+    from tbl_collect
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_collect
+    delete from tbl_collect
     where collect_id = #{collectId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.CollectExample">
-    delete from tp_collect
+    delete from tbl_collect
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.Collect">
-    insert into tp_collect (collect_id, book_id, user_id, 
+    insert into tbl_collect (collect_id, book_id, user_id, 
       create_time)
     values (#{collectId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.Collect">
-    insert into tp_collect
+    insert into tbl_collect
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="collectId != null">
         collect_id,
@@ -144,13 +144,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.CollectExample" resultType="java.lang.Long">
-    select count(*) from tp_collect
+    select count(*) from tbl_collect
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_collect
+    update tbl_collect
     <set>
       <if test="record.collectId != null">
         collect_id = #{record.collectId,jdbcType=INTEGER},
@@ -170,7 +170,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_collect
+    update tbl_collect
     set collect_id = #{record.collectId,jdbcType=INTEGER},
       book_id = #{record.bookId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
@@ -180,7 +180,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.Collect">
-    update tp_collect
+    update tbl_collect
     <set>
       <if test="bookId != null">
         book_id = #{bookId,jdbcType=INTEGER},
@@ -195,7 +195,7 @@
     where collect_id = #{collectId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.Collect">
-    update tp_collect
+    update tbl_collect
     set book_id = #{bookId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}

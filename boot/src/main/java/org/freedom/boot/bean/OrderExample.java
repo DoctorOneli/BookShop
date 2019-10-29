@@ -296,7 +296,7 @@ public class OrderExample {
         }
 
         public Criteria andUserIdEqualTo(Integer value) {
-            addCriterion("`tp_order`.`user_id` =", value, "userId");
+            addCriterion("`tbl_order`.`user_id` =", value, "userId");
             return (Criteria) this;
         }
 
@@ -416,7 +416,7 @@ public class OrderExample {
         }
 
         public Criteria andFlagEqualTo(Boolean value) {
-            addCriterion("`tp_order`.`flag` =", value, "flag");
+            addCriterion("`tbl_order`.`flag` =", value, "flag");
             return (Criteria) this;
         }
 

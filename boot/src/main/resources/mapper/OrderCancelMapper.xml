@@ -74,7 +74,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_order_cancel
+    from tbl_order_cancel
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,27 +85,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_order_cancel
+    from tbl_order_cancel
     where order_cancel_id = #{orderCancelId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_order_cancel
+    delete from tbl_order_cancel
     where order_cancel_id = #{orderCancelId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.OrderCancelExample">
-    delete from tp_order_cancel
+    delete from tbl_order_cancel
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.OrderCancel">
-    insert into tp_order_cancel (order_cancel_id, order_id, cancel_reason_id, 
+    insert into tbl_order_cancel (order_cancel_id, order_id, cancel_reason_id, 
       detail)
     values (#{orderCancelId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{cancelReasonId,jdbcType=INTEGER}, 
       #{detail,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.OrderCancel">
-    insert into tp_order_cancel
+    insert into tbl_order_cancel
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderCancelId != null">
         order_cancel_id,
@@ -136,13 +136,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.OrderCancelExample" resultType="java.lang.Long">
-    select count(*) from tp_order_cancel
+    select count(*) from tbl_order_cancel
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_order_cancel
+    update tbl_order_cancel
     <set>
       <if test="record.orderCancelId != null">
         order_cancel_id = #{record.orderCancelId,jdbcType=INTEGER},
@@ -162,7 +162,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_order_cancel
+    update tbl_order_cancel
     set order_cancel_id = #{record.orderCancelId,jdbcType=INTEGER},
       order_id = #{record.orderId,jdbcType=INTEGER},
       cancel_reason_id = #{record.cancelReasonId,jdbcType=INTEGER},
@@ -172,7 +172,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.OrderCancel">
-    update tp_order_cancel
+    update tbl_order_cancel
     <set>
       <if test="orderId != null">
         order_id = #{orderId,jdbcType=INTEGER},
@@ -187,7 +187,7 @@
     where order_cancel_id = #{orderCancelId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.OrderCancel">
-    update tp_order_cancel
+    update tbl_order_cancel
     set order_id = #{orderId,jdbcType=INTEGER},
       cancel_reason_id = #{cancelReasonId,jdbcType=INTEGER},
       detail = #{detail,jdbcType=VARCHAR}

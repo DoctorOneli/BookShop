@@ -11,14 +11,14 @@
 		<result column="shop_id" jdbcType="INTEGER" property="shopId" />
 		<result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
 	</resultMap>
-	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+	<resultMap extends="ResultMapWithType" id="ResultMapWithBLOBs"
 		type="org.freedom.boot.bean.BookWithBLOBs">
 		<result column="book_detail" jdbcType="LONGVARCHAR" property="bookDetail" />
 		<result column="book_img" jdbcType="LONGVARCHAR" property="bookImg" />
 		<result column="detail_img" jdbcType="LONGVARCHAR" property="detailImg" />
 	</resultMap>
 
-	<resultMap id="selectByExampleWithType" type="org.freedom.boot.bean.Book">
+	<resultMap id="ResultMapWithType" type="org.freedom.boot.bean.Book">
 		<id column="book_id" jdbcType="INTEGER" property="bookId" />
 		<result column="book_name" jdbcType="VARCHAR" property="bookName" />
 		<result column="book_price" jdbcType="DECIMAL" property="bookPrice" />
@@ -112,34 +112,32 @@
 	</sql>
 
 	<sql id="BookWithTypeList">
-		`tp_book`.`book_id` AS `book_id`,
-		`tp_book`.`book_name` AS
+		`tbl_book`.`book_id` AS `book_id`,
+		`tbl_book`.`book_name` AS
 		`book_name`,
-		`tp_book`.`book_price` AS `book_price`,
-		`tp_book`.`book_img` AS `book_img`,
-		`tp_book`.`book_author` AS
+		`tbl_book`.`book_price` AS `book_price`,
+		`tbl_book`.`book_img` AS `book_img`,
+		`tbl_book`.`book_author` AS
 		`book_author`,
-		`tp_book`.`book_cover` AS `book_cover`,
-		`tp_book`.`detail_img` AS `detail_img`,
-		`tp_book`.`book_detail` AS
+		`tbl_book`.`book_cover` AS `book_cover`,
+		`tbl_book`.`detail_img` AS `detail_img`,
+		`tbl_book`.`book_detail` AS
 		`book_detail`,
-		`tp_book`.`book_type_id` AS `book_type_id`,
-		`tp_book`.`book_count` AS `book_count`,
-		`tp_book_type`.type_name AS `book_type_name`
+		`tbl_book`.`book_type_id` AS `book_type_id`,
+		`tbl_book`.`book_count` AS `book_count`,
+		`tbl_book_type`.type_name AS `book_type_name`
 	</sql>
 
 	<select id="selectByExampleWithType" parameterType="org.freedom.boot.bean.BookExample"
-		resultMap="ResultMapWithBLOBs">
+		resultMap="ResultMapWithType">
 		select
 		<if test="distinct">
 			distinct
 		</if>
 		<include refid="BookWithTypeList" />
 		FROM
-		( `tp_book` JOIN `tp_book_type` ON ( ( `tp_book`.`book_type_id` =
-		`tp_book_type`.`book_type_id` ) ) )
-		ORDER BY
-		`tp_book`.`book_id`
+		( `tbl_book` JOIN `tbl_book_type` ON ( ( `tbl_book`.`book_type_id` =
+		`tbl_book_type`.`book_type_id` ) ) )
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -159,7 +157,7 @@
 		<include refid="Base_Column_List" />
 		,
 		<include refid="Blob_Column_List" />
-		from tp_book
+		from tbl_book
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -174,7 +172,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from tp_book
+		from tbl_book
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -185,25 +183,25 @@
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
 		resultMap="ResultMapWithBLOBs">
 		select
-		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
-		from tp_book
-		where book_id = #{bookId,jdbcType=INTEGER}
+		<include refid="BookWithTypeList" />
+		FROM
+		( `tbl_book` JOIN `tbl_book_type` ON ( ( `tbl_book`.`book_type_id` =
+		`tbl_book_type`.`book_type_id` ) ) )
+		where `tbl_book`.book_id = #{bookId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
-		tp_book
+		tbl_book
 		where book_id = #{bookId,jdbcType=INTEGER}
 	</delete>
 	<delete id="deleteByExample" parameterType="org.freedom.boot.bean.BookExample">
-		delete from tp_book
+		delete from tbl_book
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
 	<insert id="insert" parameterType="org.freedom.boot.bean.BookWithBLOBs">
-		insert into tp_book (book_id,
+		insert into tbl_book (book_id,
 		book_name, book_price,
 		book_type_id, book_count, book_author,
 		shop_id,
@@ -219,8 +217,9 @@
 		#{bookImg,jdbcType=LONGVARCHAR},
 		#{detailImg,jdbcType=LONGVARCHAR})
 	</insert>
-	<insert id="insertSelective" parameterType="org.freedom.boot.bean.BookWithBLOBs">
-		insert into tp_book
+	<insert id="insertSelective" useGeneratedKeys="true" keyColumn="book_id"
+		keyProperty="bookId" parameterType="org.freedom.boot.bean.BookWithBLOBs">
+		insert into tbl_book
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="bookId != null">
 				book_id,
@@ -294,13 +293,13 @@
 	</insert>
 	<select id="countByExample" parameterType="org.freedom.boot.bean.BookExample"
 		resultType="java.lang.Long">
-		select count(*) from tp_book
+		select count(*) from tbl_book
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</select>
 	<update id="updateByExampleSelective" parameterType="map">
-		update tp_book
+		update tbl_book
 		<set>
 			<if test="record.bookId != null">
 				book_id = #{record.bookId,jdbcType=INTEGER},
@@ -341,7 +340,7 @@
 		</if>
 	</update>
 	<update id="updateByExampleWithBLOBs" parameterType="map">
-		update tp_book
+		update tbl_book
 		set book_id = #{record.bookId,jdbcType=INTEGER},
 		book_name = #{record.bookName,jdbcType=VARCHAR},
 		book_price =
@@ -367,7 +366,7 @@
 		</if>
 	</update>
 	<update id="updateByExample" parameterType="map">
-		update tp_book
+		update tbl_book
 		set book_id = #{record.bookId,jdbcType=INTEGER},
 		book_name = #{record.bookName,jdbcType=VARCHAR},
 		book_price =
@@ -387,7 +386,7 @@
 		</if>
 	</update>
 	<update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.BookWithBLOBs">
-		update tp_book
+		update tbl_book
 		<set>
 			<if test="bookName != null">
 				book_name = #{bookName,jdbcType=VARCHAR},
@@ -424,7 +423,7 @@
 	</update>
 	<update id="updateByPrimaryKeyWithBLOBs" parameterType="org.freedom.boot.bean.BookWithBLOBs">
 		update
-		tp_book
+		tbl_book
 		set book_name = #{bookName,jdbcType=VARCHAR},
 		book_price =
 		#{bookPrice,jdbcType=DECIMAL},
@@ -446,7 +445,7 @@
 		#{bookId,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.Book">
-		update tp_book
+		update tbl_book
 		set
 		book_name = #{bookName,jdbcType=VARCHAR},
 		book_price =

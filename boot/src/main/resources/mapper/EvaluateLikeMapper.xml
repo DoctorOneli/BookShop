@@ -74,7 +74,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_evaluate_like
+    from tbl_evaluate_like
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,27 +85,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_evaluate_like
+    from tbl_evaluate_like
     where like_id = #{likeId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_evaluate_like
+    delete from tbl_evaluate_like
     where like_id = #{likeId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.EvaluateLikeExample">
-    delete from tp_evaluate_like
+    delete from tbl_evaluate_like
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.EvaluateLike">
-    insert into tp_evaluate_like (like_id, evaluate_id, user_id, 
+    insert into tbl_evaluate_like (like_id, evaluate_id, user_id, 
       like_time)
     values (#{likeId,jdbcType=INTEGER}, #{evaluateId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
       #{likeTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.EvaluateLike">
-    insert into tp_evaluate_like
+    insert into tbl_evaluate_like
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="likeId != null">
         like_id,
@@ -136,13 +136,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.EvaluateLikeExample" resultType="java.lang.Long">
-    select count(*) from tp_evaluate_like
+    select count(*) from tbl_evaluate_like
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_evaluate_like
+    update tbl_evaluate_like
     <set>
       <if test="record.likeId != null">
         like_id = #{record.likeId,jdbcType=INTEGER},
@@ -162,7 +162,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_evaluate_like
+    update tbl_evaluate_like
     set like_id = #{record.likeId,jdbcType=INTEGER},
       evaluate_id = #{record.evaluateId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
@@ -172,7 +172,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.EvaluateLike">
-    update tp_evaluate_like
+    update tbl_evaluate_like
     <set>
       <if test="evaluateId != null">
         evaluate_id = #{evaluateId,jdbcType=INTEGER},
@@ -187,7 +187,7 @@
     where like_id = #{likeId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.EvaluateLike">
-    update tp_evaluate_like
+    update tbl_evaluate_like
     set evaluate_id = #{evaluateId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
       like_time = #{likeTime,jdbcType=TIMESTAMP}

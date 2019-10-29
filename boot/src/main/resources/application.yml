@@ -8,20 +8,37 @@ server:
       timeout: 30m
     context-path: /boot
   tomcat:
-    uri-encoding: utf-8
+    uri-encoding: UTF-8
     max-threads: 500
     
 
-spring:
-#静态资源的访问配置
-  mvc:
-    static-path-pattern: /public/**
-    throw-exception-if-no-handler-found: true
-    
-  resources:
-    static-locations: classpath:/templates/
-    add-mappings: false
+#上传文件目录
+upload:
+  path:
+    #临时目录
+    temporary: /usr/java/        #D:/java/(windows路径)  
+    #正式目录
+    formal: /usr/java/         #D:/java/    
+  multipart:
+    #单个文件最大内存
+    maxFileSize: 512KB
+    #所有文件最大内存
+    maxRequestSize: 5MB
 
+#Linux环境的目录
+#upload:
+#  path:
+#    #临时目录
+#    temporary: /usr/java/
+#    #正式目录
+#    formal: /usr/java/
+#  multipart:
+#    #单个文件最大内存
+#    maxFileSize: 512KB
+#    #所有文件最大内存
+#    maxRequestSize: 5MB
+
+spring:
 #配置返回json格式
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss 
@@ -33,8 +50,8 @@ spring:
 
 #数据库连接配置
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://localhost:3306/book?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    driverClassName: com.mysql.jdbc.Driver
     username: root
     password: ooq666
 
@@ -44,6 +61,15 @@ spring:
     host: 127.0.0.1
     port: 6379
     password: ooq666
+#资源访问
+  resources:
+    static-locations: file:${upload.path.formal},classpath:/static/
+#编码 
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
     
 #mybatis配置
 mybatis:
@@ -56,3 +82,4 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+

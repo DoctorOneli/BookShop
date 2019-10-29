@@ -72,7 +72,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_book_type
+    from tbl_book_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,25 +83,25 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_book_type
+    from tbl_book_type
     where book_type_id = #{bookTypeId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_book_type
+    delete from tbl_book_type
     where book_type_id = #{bookTypeId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.BookTypeExample">
-    delete from tp_book_type
+    delete from tbl_book_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.BookType">
-    insert into tp_book_type (book_type_id, type_name)
+    insert into tbl_book_type (book_type_id, type_name)
     values (#{bookTypeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.BookType">
-    insert into tp_book_type
+    insert into tbl_book_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="bookTypeId != null">
         book_type_id,
@@ -120,13 +120,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.BookTypeExample" resultType="java.lang.Long">
-    select count(*) from tp_book_type
+    select count(*) from tbl_book_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_book_type
+    update tbl_book_type
     <set>
       <if test="record.bookTypeId != null">
         book_type_id = #{record.bookTypeId,jdbcType=INTEGER},
@@ -140,7 +140,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_book_type
+    update tbl_book_type
     set book_type_id = #{record.bookTypeId,jdbcType=INTEGER},
       type_name = #{record.typeName,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -148,7 +148,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.BookType">
-    update tp_book_type
+    update tbl_book_type
     <set>
       <if test="typeName != null">
         type_name = #{typeName,jdbcType=VARCHAR},
@@ -157,7 +157,7 @@
     where book_type_id = #{bookTypeId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.BookType">
-    update tp_book_type
+    update tbl_book_type
     set type_name = #{typeName,jdbcType=VARCHAR}
     where book_type_id = #{bookTypeId,jdbcType=INTEGER}
   </update>

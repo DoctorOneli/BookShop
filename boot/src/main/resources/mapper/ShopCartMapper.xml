@@ -75,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_shop_cart
+    from tbl_shop_cart
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,27 +86,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_shop_cart
+    from tbl_shop_cart
     where shop_cart_id = #{shopCartId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_shop_cart
+    delete from tbl_shop_cart
     where shop_cart_id = #{shopCartId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.ShopCartExample">
-    delete from tp_shop_cart
+    delete from tbl_shop_cart
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.ShopCart">
-    insert into tp_shop_cart (shop_cart_id, user_id, book_id, 
+    insert into tbl_shop_cart (shop_cart_id, user_id, book_id, 
       count, create_time)
     values (#{shopCartId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, 
       #{count,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.ShopCart">
-    insert into tp_shop_cart
+    insert into tbl_shop_cart
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="shopCartId != null">
         shop_cart_id,
@@ -143,13 +143,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.ShopCartExample" resultType="java.lang.Long">
-    select count(*) from tp_shop_cart
+    select count(*) from tbl_shop_cart
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_shop_cart
+    update tbl_shop_cart
     <set>
       <if test="record.shopCartId != null">
         shop_cart_id = #{record.shopCartId,jdbcType=INTEGER},
@@ -172,7 +172,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_shop_cart
+    update tbl_shop_cart
     set shop_cart_id = #{record.shopCartId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       book_id = #{record.bookId,jdbcType=INTEGER},
@@ -183,7 +183,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.ShopCart">
-    update tp_shop_cart
+    update tbl_shop_cart
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
@@ -201,7 +201,7 @@
     where shop_cart_id = #{shopCartId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.ShopCart">
-    update tp_shop_cart
+    update tbl_shop_cart
     set user_id = #{userId,jdbcType=INTEGER},
       book_id = #{bookId,jdbcType=INTEGER},
       count = #{count,jdbcType=INTEGER},

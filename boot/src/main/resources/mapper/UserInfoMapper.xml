@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_user_info
+    from tbl_user_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,21 +87,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_user_info
+    from tbl_user_info
     where user_info_id = #{userInfoId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_user_info
+    delete from tbl_user_info
     where user_info_id = #{userInfoId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.UserInfoExample">
-    delete from tp_user_info
+    delete from tbl_user_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.UserInfo">
-    insert into tp_user_info (user_info_id, user_id, img, 
+    insert into tbl_user_info (user_info_id, user_id, img, 
       phone, birth, update_time
       )
     values (#{userInfoId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, 
@@ -109,7 +109,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.UserInfo">
-    insert into tp_user_info
+    insert into tbl_user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userInfoId != null">
         user_info_id,
@@ -152,13 +152,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.UserInfoExample" resultType="java.lang.Long">
-    select count(*) from tp_user_info
+    select count(*) from tbl_user_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_user_info
+    update tbl_user_info
     <set>
       <if test="record.userInfoId != null">
         user_info_id = #{record.userInfoId,jdbcType=INTEGER},
@@ -184,7 +184,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_user_info
+    update tbl_user_info
     set user_info_id = #{record.userInfoId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       img = #{record.img,jdbcType=VARCHAR},
@@ -196,7 +196,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.UserInfo">
-    update tp_user_info
+    update tbl_user_info
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
@@ -217,7 +217,7 @@
     where user_info_id = #{userInfoId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.UserInfo">
-    update tp_user_info
+    update tbl_user_info
     set user_id = #{userId,jdbcType=INTEGER},
       img = #{img,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},

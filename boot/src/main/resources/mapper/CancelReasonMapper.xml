@@ -72,7 +72,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_cancel_reason
+    from tbl_cancel_reason
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,25 +83,25 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_cancel_reason
+    from tbl_cancel_reason
     where cancel_reason_id = #{cancelReasonId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tp_cancel_reason
+    delete from tbl_cancel_reason
     where cancel_reason_id = #{cancelReasonId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.CancelReasonExample">
-    delete from tp_cancel_reason
+    delete from tbl_cancel_reason
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.CancelReason">
-    insert into tp_cancel_reason (cancel_reason_id, name)
+    insert into tbl_cancel_reason (cancel_reason_id, name)
     values (#{cancelReasonId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.CancelReason">
-    insert into tp_cancel_reason
+    insert into tbl_cancel_reason
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cancelReasonId != null">
         cancel_reason_id,
@@ -120,13 +120,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.CancelReasonExample" resultType="java.lang.Long">
-    select count(*) from tp_cancel_reason
+    select count(*) from tbl_cancel_reason
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_cancel_reason
+    update tbl_cancel_reason
     <set>
       <if test="record.cancelReasonId != null">
         cancel_reason_id = #{record.cancelReasonId,jdbcType=INTEGER},
@@ -140,7 +140,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_cancel_reason
+    update tbl_cancel_reason
     set cancel_reason_id = #{record.cancelReasonId,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -148,7 +148,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.CancelReason">
-    update tp_cancel_reason
+    update tbl_cancel_reason
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -157,7 +157,7 @@
     where cancel_reason_id = #{cancelReasonId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.CancelReason">
-    update tp_cancel_reason
+    update tbl_cancel_reason
     set name = #{name,jdbcType=VARCHAR}
     where cancel_reason_id = #{cancelReasonId,jdbcType=INTEGER}
   </update>

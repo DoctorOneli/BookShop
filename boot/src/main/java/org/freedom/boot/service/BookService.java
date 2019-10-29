@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.freedom.boot.bean.Book;
+import org.freedom.boot.bean.BookExample;
 import org.freedom.boot.bean.CollectExample;
 import org.freedom.boot.bean.CollectExample.Criteria;
 import org.freedom.boot.dao.BookMapper;
@@ -26,7 +27,9 @@ public class BookService {
 	 * @return
 	 */
 	public List<Book> getBookList() {
-		return bookMapper.selectByExampleWithType(null);
+		BookExample bookExample=new BookExample();
+		bookExample.setOrderByClause("book_id");
+		return bookMapper.selectByExampleWithType(bookExample);
 	}
 
 	/**

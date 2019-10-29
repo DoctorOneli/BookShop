@@ -73,7 +73,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_order_refund
+    from tbl_order_refund
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,27 +84,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_order_refund
+    from tbl_order_refund
     where order_refund_id = #{orderRefundId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from tp_order_refund
+    delete from tbl_order_refund
     where order_refund_id = #{orderRefundId,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="org.freedom.boot.bean.OrderRefundExample">
-    delete from tp_order_refund
+    delete from tbl_order_refund
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="org.freedom.boot.bean.OrderRefund">
-    insert into tp_order_refund (order_refund_id, order_item_id, if_refund
+    insert into tbl_order_refund (order_refund_id, order_item_id, if_refund
       )
     values (#{orderRefundId,jdbcType=VARCHAR}, #{orderItemId,jdbcType=VARCHAR}, #{ifRefund,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.freedom.boot.bean.OrderRefund">
-    insert into tp_order_refund
+    insert into tbl_order_refund
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderRefundId != null">
         order_refund_id,
@@ -129,13 +129,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.freedom.boot.bean.OrderRefundExample" resultType="java.lang.Long">
-    select count(*) from tp_order_refund
+    select count(*) from tbl_order_refund
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_order_refund
+    update tbl_order_refund
     <set>
       <if test="record.orderRefundId != null">
         order_refund_id = #{record.orderRefundId,jdbcType=VARCHAR},
@@ -152,7 +152,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_order_refund
+    update tbl_order_refund
     set order_refund_id = #{record.orderRefundId,jdbcType=VARCHAR},
       order_item_id = #{record.orderItemId,jdbcType=VARCHAR},
       if_refund = #{record.ifRefund,jdbcType=INTEGER}
@@ -161,7 +161,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="org.freedom.boot.bean.OrderRefund">
-    update tp_order_refund
+    update tbl_order_refund
     <set>
       <if test="orderItemId != null">
         order_item_id = #{orderItemId,jdbcType=VARCHAR},
@@ -173,7 +173,7 @@
     where order_refund_id = #{orderRefundId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.OrderRefund">
-    update tp_order_refund
+    update tbl_order_refund
     set order_item_id = #{orderItemId,jdbcType=VARCHAR},
       if_refund = #{ifRefund,jdbcType=INTEGER}
     where order_refund_id = #{orderRefundId,jdbcType=VARCHAR}
