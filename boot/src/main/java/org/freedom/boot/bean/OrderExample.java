@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.freedom.boot.bean.BookExample.Criteria;
+
 public class OrderExample {
     protected String orderByClause;
 
@@ -116,7 +118,7 @@ public class OrderExample {
         }
 
         public Criteria andOrderIdEqualTo(Integer value) {
-            addCriterion("order_id =", value, "orderId");
+            addCriterion("tbl_order.order_id =", value, "orderId");
             return (Criteria) this;
         }
 
@@ -236,7 +238,7 @@ public class OrderExample {
         }
 
         public Criteria andOrderStateIdEqualTo(Integer value) {
-            addCriterion("order_state_id =", value, "orderStateId");
+            addCriterion("tbl_order.order_state_id =", value, "orderStateId");
             return (Criteria) this;
         }
 
@@ -462,6 +464,11 @@ public class OrderExample {
 
         public Criteria andFlagNotBetween(Boolean value1, Boolean value2) {
             addCriterion("flag not between", value1, value2, "flag");
+            return (Criteria) this;
+        }
+        
+        public Criteria andUserNameLike(String value) {
+            addCriterion("tbl_user.nick_name like", value, "nickName");
             return (Criteria) this;
         }
     }

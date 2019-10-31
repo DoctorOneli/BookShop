@@ -23,7 +23,10 @@ public interface OrderMapper {
     List<Order> selectByExample(OrderExample example);
     
     List<Order> selectByExampleWithAll(OrderExample example);
-
+    
+    List<Order> selectByExampleWithAddress(OrderExample example);
+    
+    
     Order selectByPrimaryKey(Integer orderId);
 
     int updateByExampleSelective(@Param("record") Order record, @Param("example") OrderExample example);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "httbl://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.freedom.boot.dao.OrderMapper">
 	<resultMap id="BaseResultMap" type="org.freedom.boot.bean.Order">
 		<id column="order_id" jdbcType="INTEGER" property="orderId" />
@@ -9,7 +9,7 @@
 		<result column="address_id" jdbcType="INTEGER" property="addressId" />
 		<result column="flag" jdbcType="BIT" property="flag" />
 	</resultMap>
-	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+	<resultMap extends="AllResultMap" id="ResultMapWithBLOBs"
 		type="org.freedom.boot.bean.Order">
 		<result column="remark" jdbcType="LONGVARCHAR" property="remark" />
 	</resultMap>
@@ -35,6 +35,35 @@
 			</association>
 		</collection>
 	</resultMap>
+
+	<resultMap id="WithAddressResultMap" type="org.freedom.boot.bean.Order">
+		<id column="order_id" jdbcType="INTEGER" property="orderId" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="order_state_id" jdbcType="INTEGER" property="orderStateId" />
+		<result column="flag" jdbcType="BIT" property="flag" />
+		<association property="address" column="address_id"
+			javaType="org.freedom.boot.bean.Address">
+			<id column="address_id" property="addressId" />
+			<result column="receiver_name" property="receiverName" />
+			<result column="province" property="province" />
+		</association>
+		<association property="user" column="user_id"
+			javaType="org.freedom.boot.bean.User">
+			<id column="user_id" property="userId" />
+			<result column="nick_name" property="nickName" />
+		</association>
+		<association property="orderState" column="order_state_id"
+			javaType="org.freedom.boot.bean.OrderState">
+			<id column="order_state_id" property="orderStateId" />
+			<result column="name" property="name" />
+		</association>
+
+
+
+
+	</resultMap>
+
+
 
 	<sql id="Example_Where_Clause">
 		<where>
@@ -114,20 +143,43 @@
 		`tbl_order`.`order_id` AS `order_id`,
 		`tbl_order`.`create_time` AS
 		`create_time`,
+		`tbl_order`.`remark` AS
+		`remark`,
 		`tbl_order`.`order_state_id` AS `order_state_id`,
 		`tbl_order_item`.`count` AS `count`,
-		`tbl_order_item`.`price` AS `price`,
+		`tbl_order_item`.`price` AS
+		`price`,
 		`tbl_order_item`.`book_id` AS `book_id`,
-		`tbl_order`.`flag` AS `flag`,
+		`tbl_order`.`flag` AS
+		`flag`,
 		`tbl_book`.`book_name` AS
 		`book_name`,
-		`tbl_book`.`book_author` AS
+		`tbl_book`.`book_author`
+		AS
 		`book_author`,
 		`tbl_book`.`book_img` AS `book_img`,
 		`tbl_order`.`address_id` AS
 		`address_id`,
 		`tbl_address`.`concrete_address` AS `concrete_address`,
 		`tbl_book`.`book_cover` AS `book_cover`
+	</sql>
+
+	<sql id="OrderWithAddress_Column_List">
+		`tbl_user`.`user_id` AS `user_id`,
+		`tbl_user`.`nick_name` AS
+		`nick_name`,
+		`tbl_order`.`create_time` AS `create_time`,
+		`tbl_order`.`order_id` AS `order_id`,
+		`tbl_order_state`.`name` AS
+		`name`,
+		`tbl_order_state`.`order_state_id` AS `order_state_id`,
+		`tbl_address`.`address_id` AS `address_id`,
+		`tbl_address`.`receiver_name` AS `receiver_name`,
+		`tbl_address`.`province` AS `province`,
+		`tbl_address`.`concrete_address` AS `concrete_address`,
+		`tbl_address`.`city` AS `city`,
+		`tbl_address`.`area` AS `area`,
+		`tbl_order`.`flag` AS `flag`
 	</sql>
 
 
@@ -146,7 +198,8 @@
 		( `tbl_order` JOIN `tbl_order_item` ON ( (
 		`tbl_order_item`.`order_id` =
 		`tbl_order`.`order_id` ) ) )
-		JOIN `tbl_book`
+		JOIN
+		`tbl_book`
 		ON ( ( `tbl_order_item`.`book_id` = `tbl_book`.`book_id` ) )
 		)
 		JOIN
@@ -160,6 +213,39 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+
+
+	<select id="selectByExampleWithAddress" parameterType="org.freedom.boot.bean.OrderExample"
+		resultMap="WithAddressResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="OrderWithAddress_Column_List" />
+		FROM
+		(
+		(
+		( `tbl_order` JOIN `tbl_user` ON ( ( `tbl_order`.`user_id` =
+		`tbl_user`.`user_id` ) ) )
+		JOIN `tbl_order_state` ON ( (
+		`tbl_order`.`order_state_id` =
+		`tbl_order_state`.`order_state_id` ) )
+		)
+		JOIN `tbl_address` ON ( ( ( `tbl_address`.`user_id` =
+		`tbl_user`.`user_id` )
+		AND ( `tbl_order`.`address_id` =
+		`tbl_address`.`address_id` ) ) )
+		)
+
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+
+
 
 	<select id="selectByExampleWithBLOBs" parameterType="org.freedom.boot.bean.OrderExample"
 		resultMap="ResultMapWithBLOBs">
@@ -196,11 +282,22 @@
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
 		resultMap="ResultMapWithBLOBs">
 		select
-		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
-		from tbl_order
-		where order_id = #{orderId,jdbcType=INTEGER}
+		<include refid="All_Column_List" />
+		FROM
+		(
+		(
+		( `tbl_order` JOIN `tbl_order_item` ON ( (
+		`tbl_order_item`.`order_id` =
+		`tbl_order`.`order_id` ) ) )
+		JOIN
+		`tbl_book`
+		ON ( ( `tbl_order_item`.`book_id` = `tbl_book`.`book_id` ) )
+		)
+		JOIN
+		`tbl_address` ON ( ( `tbl_order`.`address_id` =
+		`tbl_address`.`address_id` ) )
+		)
+		where tbl_order.order_id = #{orderId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from

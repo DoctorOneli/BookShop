@@ -22,6 +22,10 @@ public class Order {
 	private List<OrderItem> orderItem;
 	
 	private Address address;
+	
+	private OrderState orderState;
+	
+	private User user;
 
 	public Order() {
 		super();
@@ -41,6 +45,23 @@ public class Order {
 	}
 	
 	
+	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public OrderState getOrderState() {
+		return orderState;
+	}
+
+	public void setOrderState(OrderState orderState) {
+		this.orderState = orderState;
+	}
 
 	public List<OrderItem> getOrderItem() {
 		return orderItem;

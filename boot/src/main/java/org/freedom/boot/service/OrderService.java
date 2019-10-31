@@ -73,7 +73,7 @@ public class OrderService {
 	 * @param userId
 	 * @return
 	 */
-	public List<Order> listOrder(Integer userId) {
+	public List<Order> getOrderListByUser(Integer userId) {
 
 		OrderExample orderExample=new OrderExample();
 		Criteria criteria=orderExample.createCriteria();
@@ -118,6 +118,17 @@ public class OrderService {
 	    order.setAddressId(addressId);
 	    orderMapper.updateByPrimaryKey(order);
 		
+	}
+	
+	
+	/**
+	 * 查询所有订单
+	 * @param userId
+	 * @return
+	 */
+	public List<Order> getOrderList() {
+
+		return orderMapper.selectByExampleWithAll(null);
 	}
 	
 	

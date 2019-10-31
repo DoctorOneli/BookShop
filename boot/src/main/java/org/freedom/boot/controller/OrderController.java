@@ -23,7 +23,7 @@ public class OrderController {
 	@GetMapping("/orderlist")
 	public Msg listOrder(Integer user_id)
 	{
-	    return Msg.success().add("order", orderService.listOrder(user_id)); 
+	    return Msg.success().add("order", orderService.getOrderListByUser(user_id)); 
 	}
 	
 	
