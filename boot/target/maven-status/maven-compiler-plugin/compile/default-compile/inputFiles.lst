@@ -18,6 +18,7 @@ E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\Area.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\OrderStateExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\EvaluateMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\ShopMapper.java
+E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\AdminOrderService.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\AdminExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\BookExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\CommonExceptionAdvice.java
@@ -45,6 +46,7 @@ E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\PowerMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\OrderExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\EvaluateLike.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\UserInfoMapper.java
+E:\BookShopGit\boot\src\main\java\org\freedom\boot\controller\AdminOrderController.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\CollectMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\AreaExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\EvaluateLikeExample.java

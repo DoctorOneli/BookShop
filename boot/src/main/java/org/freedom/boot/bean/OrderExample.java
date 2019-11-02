@@ -228,12 +228,12 @@ public class OrderExample {
         }
 
         public Criteria andOrderStateIdIsNull() {
-            addCriterion("order_state_id is null");
+            addCriterion("tbl_order.order_state_id is null");
             return (Criteria) this;
         }
 
         public Criteria andOrderStateIdIsNotNull() {
-            addCriterion("order_state_id is not null");
+            addCriterion("tbl_order.order_state_id is not null");
             return (Criteria) this;
         }
 
@@ -243,47 +243,47 @@ public class OrderExample {
         }
 
         public Criteria andOrderStateIdNotEqualTo(Integer value) {
-            addCriterion("order_state_id <>", value, "orderStateId");
+            addCriterion("tbl_order.order_state_id <>", value, "orderStateId");
             return (Criteria) this;
         }
 
         public Criteria andOrderStateIdGreaterThan(Integer value) {
-            addCriterion("order_state_id >", value, "orderStateId");
+            addCriterion("tbl_order.order_state_id >", value, "orderStateId");
             return (Criteria) this;
         }
 
         public Criteria andOrderStateIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("order_state_id >=", value, "orderStateId");
+            addCriterion("tbl_order.order_state_id >=", value, "orderStateId");
             return (Criteria) this;
         }
 
         public Criteria andOrderStateIdLessThan(Integer value) {
-            addCriterion("order_state_id <", value, "orderStateId");
+            addCriterion("tbl_order.order_state_id <", value, "orderStateId");
             return (Criteria) this;
         }
 
         public Criteria andOrderStateIdLessThanOrEqualTo(Integer value) {
-            addCriterion("order_state_id <=", value, "orderStateId");
+            addCriterion("tbl_order.order_state_id <=", value, "orderStateId");
             return (Criteria) this;
         }
 
         public Criteria andOrderStateIdIn(List<Integer> values) {
-            addCriterion("order_state_id in", values, "orderStateId");
+            addCriterion("tbl_order.order_state_id in", values, "orderStateId");
             return (Criteria) this;
         }
 
         public Criteria andOrderStateIdNotIn(List<Integer> values) {
-            addCriterion("order_state_id not in", values, "orderStateId");
+            addCriterion("tbl_order.order_state_id not in", values, "orderStateId");
             return (Criteria) this;
         }
 
         public Criteria andOrderStateIdBetween(Integer value1, Integer value2) {
-            addCriterion("order_state_id between", value1, value2, "orderStateId");
+            addCriterion("tbl_order.order_state_id between", value1, value2, "orderStateId");
             return (Criteria) this;
         }
 
         public Criteria andOrderStateIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("order_state_id not between", value1, value2, "orderStateId");
+            addCriterion("tbl_order.order_state_id not between", value1, value2, "orderStateId");
             return (Criteria) this;
         }
 
