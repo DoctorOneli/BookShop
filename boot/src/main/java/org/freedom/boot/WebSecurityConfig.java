@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.freedom.boot.bean.Msg;
+import org.freedom.boot.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,6 +41,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	AdminService adminService;
+	
 	 @Bean
 	    PasswordEncoder passwordEncoder() {
 	        return new BCryptPasswordEncoder();
@@ -47,20 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-		.withUser("admin")
-		.password("$2a$10$egrVasoySvvYuzo/fWzCReMjsv.t8JzTV3MyN8iiFkFT1KU2M/pjS")
-		.roles("BOOK_ADMIN","ORDER_ADMIN","USER_ADMIN")
-		.and()
-		.withUser("li")
-		.password("$2a$10$lSy57hHZtSovWMx3vPLgiezf1al1qPHWhLfgHoGNpthadJc1fcaD.")
-		.roles("BOOK_ADMIN")
-		.and()
-		.withUser("zi").password("$2a$10$pEt4uaZz/9mMFLofVErQN.fYfOCPhLAB9gyNs1qaPYJ.LrlO/Q.YS")
-		.roles("ORDER_ADMIN")
-		.and()
-		.withUser("hao")
-		.password("$2a$10$gj.BJxlGAQqCipNNCUgGgukF0yHMxHf0JaAnmdHazORF3NykvhAze").roles("USER_ADMIN");
+		 auth.userDetailsService(adminService);
 	}
 
 	@Override

@@ -233,6 +233,76 @@ public class RoleExample {
             addCriterion("name not between", value1, value2, "name");
             return (Criteria) this;
         }
+
+        public Criteria andNameZhIsNull() {
+            addCriterion("name_zh is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhIsNotNull() {
+            addCriterion("name_zh is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhEqualTo(String value) {
+            addCriterion("name_zh =", value, "nameZh");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhNotEqualTo(String value) {
+            addCriterion("name_zh <>", value, "nameZh");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhGreaterThan(String value) {
+            addCriterion("name_zh >", value, "nameZh");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhGreaterThanOrEqualTo(String value) {
+            addCriterion("name_zh >=", value, "nameZh");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhLessThan(String value) {
+            addCriterion("name_zh <", value, "nameZh");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhLessThanOrEqualTo(String value) {
+            addCriterion("name_zh <=", value, "nameZh");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhLike(String value) {
+            addCriterion("name_zh like", value, "nameZh");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhNotLike(String value) {
+            addCriterion("name_zh not like", value, "nameZh");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhIn(List<String> values) {
+            addCriterion("name_zh in", values, "nameZh");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhNotIn(List<String> values) {
+            addCriterion("name_zh not in", values, "nameZh");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhBetween(String value1, String value2) {
+            addCriterion("name_zh between", value1, value2, "nameZh");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhNotBetween(String value1, String value2) {
+            addCriterion("name_zh not between", value1, value2, "nameZh");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

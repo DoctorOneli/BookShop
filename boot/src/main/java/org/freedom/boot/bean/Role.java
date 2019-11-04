@@ -1,16 +1,18 @@
 package org.freedom.boot.bean;
 
 public class Role {
-    private Integer roleId;
+    private Integer role_id;
 
     private String name;
 
+    private String name_zh;
+
     public Integer getRoleId() {
-        return roleId;
+        return role_id;
     }
 
     public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+        this.role_id = roleId;
     }
 
     public String getName() {
@@ -19,5 +21,13 @@ public class Role {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getNameZh() {
+        return name_zh;
+    }
+
+    public void setNameZh(String nameZh) {
+        this.name_zh = nameZh == null ? null : nameZh.trim();
     }
 }

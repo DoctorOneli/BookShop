@@ -16,9 +16,9 @@ server:
 upload:
   path:
     #临时目录
-    temporary: /usr/java/        #D:/java/(windows路径)  
+    temporary: D:/java/        #D:/java/(windows路径)  
     #正式目录
-    formal: /usr/java/         #D:/java/    
+    formal: D:/java/         #D:/java/    
   multipart:
     #单个文件最大内存
     maxFileSize: 512KB

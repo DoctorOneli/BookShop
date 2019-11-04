@@ -6,8 +6,37 @@ public class AdminRole {
     private Integer adminId;
 
     private Integer roleId;
+    
+    private Role role;
 
-    public Integer getUserRoleId() {
+    
+    
+    public AdminRole() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+    
+
+	public AdminRole(Integer userRoleId, Integer adminId, Integer roleId, Role role) {
+		super();
+		this.userRoleId = userRoleId;
+		this.adminId = adminId;
+		this.roleId = roleId;
+		this.role = role;
+	}
+
+
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Integer getUserRoleId() {
         return userRoleId;
     }
 
