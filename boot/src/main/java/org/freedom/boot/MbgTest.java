@@ -11,6 +11,11 @@ import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
+/**
+ * 逆向工程文件
+ * @author oneli
+ *
+ */
 public class MbgTest {
 
 	public static void main(String[] args) throws Exception {

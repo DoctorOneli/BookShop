@@ -3,7 +3,6 @@ package org.freedom.boot.service;
 import java.util.Date;
 import java.util.List;
 
-import org.freedom.boot.ServiceException;
 import org.freedom.boot.bean.Book;
 import org.freedom.boot.bean.Msg;
 import org.freedom.boot.bean.Order;

@@ -2,7 +2,11 @@ package org.freedom.boot;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
+/**
+ * 静态资源配置
+ * @author oneli
+ *
+ */
 @Component
 public class FilesConfig {
 

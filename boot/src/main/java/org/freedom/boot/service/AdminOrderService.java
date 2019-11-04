@@ -80,7 +80,7 @@ public class AdminOrderService {
 			} else {
 				if(ifFindByOrderId)
 				{
-					criteriaOrderId.andOrderStateIdBetween(3, 4);
+					criteriaOrderId.andOrderStateIdEqualTo(orderStateId);
 				}
 				criteriaUserName.andOrderStateIdEqualTo(orderStateId);
 			}
