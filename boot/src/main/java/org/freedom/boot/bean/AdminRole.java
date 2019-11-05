@@ -1,22 +1,20 @@
 package org.freedom.boot.bean;
 
 public class AdminRole {
-    private Integer userRoleId;
+	private Integer userRoleId;
 
-    private Integer adminId;
+	private Integer adminId;
 
-    private Integer roleId;
-    
-    private Role role;
+	private Integer roleId;
 
-    
-    
-    public AdminRole() {
+	private AdminInfo admin;
+
+	private Role role;
+
+	public AdminRole() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-    
-    
 
 	public AdminRole(Integer userRoleId, Integer adminId, Integer roleId, Role role) {
 		super();
@@ -26,7 +24,13 @@ public class AdminRole {
 		this.role = role;
 	}
 
+	public AdminInfo getAdmin() {
+		return admin;
+	}
 
+	public void setAdmin(AdminInfo admin) {
+		this.admin = admin;
+	}
 
 	public Role getRole() {
 		return role;
@@ -37,26 +41,26 @@ public class AdminRole {
 	}
 
 	public Integer getUserRoleId() {
-        return userRoleId;
-    }
+		return userRoleId;
+	}
 
-    public void setUserRoleId(Integer userRoleId) {
-        this.userRoleId = userRoleId;
-    }
+	public void setUserRoleId(Integer userRoleId) {
+		this.userRoleId = userRoleId;
+	}
 
-    public Integer getAdminId() {
-        return adminId;
-    }
+	public Integer getAdminId() {
+		return adminId;
+	}
 
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
-    }
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
+	}
 
-    public Integer getRoleId() {
-        return roleId;
-    }
+	public Integer getRoleId() {
+		return roleId;
+	}
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
 }

@@ -60,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/adminbook/**").hasRole("BOOK_ADMIN")
 				.antMatchers("/adminorder/**").hasRole("ORDER_ADMIN")
 				.antMatchers("/adminuser/**").hasRole("USER_ADMIN")
+				.antMatchers("/adminrole/**").hasRole("HYPER_ADMIN")
 				.anyRequest().authenticated()// 其他的路径都是登录后即可访问
 				.and().formLogin().loginPage("/book/login.html").loginProcessingUrl("/login")
 				.usernameParameter("username").passwordParameter("password")

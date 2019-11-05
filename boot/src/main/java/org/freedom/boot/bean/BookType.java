@@ -1,8 +1,11 @@
 package org.freedom.boot.bean;
 
+import javax.validation.constraints.NotBlank;
+
 public class BookType {
     private Integer bookTypeId;
 
+    @NotBlank(message="不能为空")
     private String typeName;
 
     public Integer getBookTypeId() {

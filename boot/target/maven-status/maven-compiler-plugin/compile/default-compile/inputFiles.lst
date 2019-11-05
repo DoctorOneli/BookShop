@@ -1,4 +1,5 @@
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\BcTest.java
+E:\BookShopGit\boot\src\main\java\org\freedom\boot\controller\AdminRoleController.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\OrderCancelMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\BookMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\RoleExample.java
@@ -15,6 +16,7 @@ E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\PowerRole.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\WebSecurityConfig.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\UploadService.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\BookTypeExample.java
+E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\AdminInfo.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\EvaluateLikeMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\PowerRoleExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\Area.java
@@ -24,10 +26,12 @@ E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\ShopMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\AdminOrderService.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\AdminExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\BookExample.java
+E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\AdminService.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\Collect.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\Power.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\controller\AdminBookController.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\controller\BookController.java
+E:\BookShopGit\boot\src\main\java\org\freedom\boot\CustomExceptionHandler.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\TomcatConfig.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\AdminUserService.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\BookService.java
@@ -58,6 +62,7 @@ E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\AdminRoleMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\OrderCancel.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\OrderRefundMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\AdminBookService.java
+E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\AdminRoleService.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\ShopExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\OrderRefund.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\PowerRoleMapper.java

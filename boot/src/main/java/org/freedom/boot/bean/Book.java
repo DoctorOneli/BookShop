@@ -2,23 +2,35 @@ package org.freedom.boot.bean;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class Book {
 	private Integer bookId;
 
+	@NotBlank(message="名称不能为空")
 	private String bookName;
 
+	@Min(0)
 	private BigDecimal bookPrice;
 
 	private Integer bookTypeId;
-
+	 
+	@Min(0)
 	private Integer bookCount;
 
+	@NotBlank(message="作者不能为空")
 	private String bookAuthor;
 
 	private Integer shopId;
 
+	@NotBlank(message="不能为空")
 	private String bookCover;
 
+	 
 	private BookType bookType;
 
 	public Book() {

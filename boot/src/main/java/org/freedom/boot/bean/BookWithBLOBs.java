@@ -1,10 +1,14 @@
 package org.freedom.boot.bean;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class BookWithBLOBs extends Book {
+	@NotBlank(message="详情不能为空")
     private String bookDetail;
 
     private String bookImg;
-
+    @NotBlank(message="不能为空")
     private String detailImg;
 
     public String getBookDetail() {

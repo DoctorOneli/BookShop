@@ -5,10 +5,16 @@
 		<id column="user_role_id" jdbcType="INTEGER" property="userRoleId" />
 		<result column="admin_id" jdbcType="INTEGER" property="adminId" />
 		<result column="role_id" jdbcType="INTEGER" property="roleId" />
-		 <association property="role" column="role_id"
+		<association property="role" column="role_id"
 			javaType="org.freedom.boot.bean.Role">
-         <id column="role_id" property="roleId"/>
-         <result column="name"  property="name" />
+			<id column="role_id" property="roleId" />
+			<result column="name" property="name" />
+			<result column="name_zh" property="nameZh" />
+		</association>
+		<association property="admin" column="admin_id"
+			javaType="org.freedom.boot.bean.AdminInfo">
+			<id column="admin_id" property="adminId" />
+			<result column="username" property="username" />
 		</association>
 	</resultMap>
 	<sql id="Example_Where_Clause">
@@ -25,7 +31,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -57,7 +64,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -75,7 +83,14 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		user_role_id, admin_id, role_id
+		tbl_role.name_zh,
+		tbl_role.`name`,
+		tbl_admin_role.role_id,
+		tbl_admin_role.admin_id,
+		tbl_admin_role.user_role_id,
+		tbl_admin.admin_id,
+		tbl_admin.`password`,
+		tbl_admin.username
 	</sql>
 	<select id="selectByExample" parameterType="org.freedom.boot.bean.AdminRoleExample"
 		resultMap="BaseResultMap">
@@ -84,7 +99,10 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from tbl_admin_role
+		FROM
+		tbl_admin
+		INNER JOIN tbl_admin_role ON tbl_admin_role.admin_id = tbl_admin.admin_id
+		INNER JOIN tbl_role ON tbl_admin_role.role_id = tbl_role.role_id
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -100,7 +118,8 @@
 		where user_role_id = #{userRoleId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from tbl_admin_role
+		delete from
+		tbl_admin_role
 		where user_role_id = #{userRoleId,jdbcType=INTEGER}
 	</delete>
 	<delete id="deleteByExample" parameterType="org.freedom.boot.bean.AdminRoleExample">
@@ -110,9 +129,11 @@
 		</if>
 	</delete>
 	<insert id="insert" parameterType="org.freedom.boot.bean.AdminRole">
-		insert into tbl_admin_role (user_role_id, admin_id, role_id
+		insert into tbl_admin_role
+		(user_role_id, admin_id, role_id
 		)
-		values (#{userRoleId,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER},
+		values
+		(#{userRoleId,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER},
 		#{roleId,jdbcType=INTEGER}
 		)
 	</insert>
@@ -167,9 +188,12 @@
 	</update>
 	<update id="updateByExample" parameterType="map">
 		update tbl_admin_role
-		set user_role_id = #{record.userRoleId,jdbcType=INTEGER},
-		admin_id = #{record.adminId,jdbcType=INTEGER},
-		role_id = #{record.roleId,jdbcType=INTEGER}
+		set user_role_id =
+		#{record.userRoleId,jdbcType=INTEGER},
+		admin_id =
+		#{record.adminId,jdbcType=INTEGER},
+		role_id =
+		#{record.roleId,jdbcType=INTEGER}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -187,9 +211,12 @@
 		where user_role_id = #{userRoleId,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="org.freedom.boot.bean.AdminRole">
-		update tbl_admin_role
+		update
+		tbl_admin_role
 		set admin_id = #{adminId,jdbcType=INTEGER},
-		role_id = #{roleId,jdbcType=INTEGER}
-		where user_role_id = #{userRoleId,jdbcType=INTEGER}
+		role_id =
+		#{roleId,jdbcType=INTEGER}
+		where user_role_id =
+		#{userRoleId,jdbcType=INTEGER}
 	</update>
 </mapper>

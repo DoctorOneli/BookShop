@@ -3,6 +3,7 @@ package org.freedom.boot.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,8 +12,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
- 
 import org.freedom.boot.bean.Book;
 import org.freedom.boot.bean.BookType;
 import org.freedom.boot.bean.BookWithBLOBs;
@@ -21,6 +22,8 @@ import org.freedom.boot.service.AdminBookService;
 import org.freedom.boot.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -91,14 +94,25 @@ public class AdminBookController {
 	}
 
 	/**
-	 * 添加书本
+	 * 添加书本，需要校验
 	 * 
-	 * @param bookWithBLOBs
+	 * @param book
 	 * @return
 	 */
 	@PostMapping("/book")
-	public Msg addBook(@RequestBody BookWithBLOBs bookWithBLOBs) {
-		int bookId = adminBookService.addBook(bookWithBLOBs);
+	public Msg addBook(@Valid @RequestBody BookWithBLOBs book,BindingResult bindingResult) {
+		
+		if (bindingResult.hasErrors()) {
+			List<String> errors=new ArrayList<String>();
+			List<ObjectError> all=bindingResult.getAllErrors();
+			for (ObjectError objectError : all) {
+				errors.add(objectError.getDefaultMessage());
+			}
+			
+			return Msg.fail().add("result", "请好好填信息，谢谢").add("data", errors);
+		}
+		
+		int bookId = adminBookService.addBook(book);
 		if (bookId > 0) {
 			return Msg.success().add("result", bookId);
 		}
@@ -141,7 +155,18 @@ public class AdminBookController {
 	 * @return
 	 */
 	@PutMapping("/book")
-	public Msg updateBook(@RequestBody BookWithBLOBs book) {
+	public Msg updateBook(@Valid @RequestBody BookWithBLOBs book,BindingResult bindingResult) {
+		
+		if (bindingResult.hasErrors()) {
+			List<String> errors=new ArrayList<String>();
+			List<ObjectError> all=bindingResult.getAllErrors();
+			for (ObjectError objectError : all) {
+				errors.add(objectError.getDefaultMessage());
+			}
+			
+			return Msg.fail().add("result", "请好好填信息，谢谢").add("data", errors);
+		}
+		
 		if (adminBookService.updateBook(book) == 1) {
 			return Msg.success().add("result", "更新成功");
 		} else {
@@ -187,7 +212,18 @@ public class AdminBookController {
 	 * @return
 	 */
 	@PutMapping("/booktype")
-	public Msg updateBookType(@RequestBody BookType bookType) {
+	public Msg updateBookType(@Valid @RequestBody BookType bookType,BindingResult bindingResult) {
+		
+		if (bindingResult.hasErrors()) {
+			List<String> errors=new ArrayList<String>();
+			List<ObjectError> all=bindingResult.getAllErrors();
+			for (ObjectError objectError : all) {
+				errors.add(objectError.getDefaultMessage());
+			}
+			
+			return Msg.fail().add("result", "请好好填信息，谢谢").add("data", errors);
+		}
+		
 		if (adminBookService.updateBookType(bookType) == 1) {
 			return Msg.success().add("result", "更新成功");
 		} else {
@@ -202,7 +238,17 @@ public class AdminBookController {
 	 * @return
 	 */
 	@PostMapping("/booktype")
-	public Msg addBookType(@RequestBody BookType bookType) {
+	public Msg addBookType(@Valid @RequestBody BookType bookType,BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			List<String> errors=new ArrayList<String>();
+			List<ObjectError> all=bindingResult.getAllErrors();
+			for (ObjectError objectError : all) {
+				errors.add(objectError.getDefaultMessage());
+			}
+			
+			return Msg.fail().add("result", "请好好填信息，谢谢").add("data", errors);
+		}
+		
 		if (adminBookService.addBookType(bookType) == 1) {
 			return Msg.success().add("result", "添加成功");
 		} else {

@@ -15,28 +15,16 @@ server:
 #上传文件目录
 upload:
   path:
-    #临时目录
-    temporary: D:/java/        #D:/java/(windows路径)  
     #正式目录
-    formal: D:/java/         #D:/java/    
-  multipart:
-    #单个文件最大内存
-    maxFileSize: 512KB
-    #所有文件最大内存
-    maxRequestSize: 5MB
+    formal: /usr/java/         #D:/java/(windows路径)      
+   
 
 #Linux环境的目录
 #upload:
 #  path:
-#    #临时目录
-#    temporary: /usr/java/
 #    #正式目录
 #    formal: /usr/java/
-#  multipart:
-#    #单个文件最大内存
-#    maxFileSize: 512KB
-#    #所有文件最大内存
-#    maxRequestSize: 5MB
+ 
 
 spring:
 #配置返回json格式
@@ -48,6 +36,10 @@ spring:
       
   mvc:
     date-format: yyyy-MM-dd HH:mm:ss
+#文件上传最大大小
+  servlet:
+    multipart:
+      max-file-size: 1MB
  
 
 
