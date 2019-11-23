@@ -1,5 +1,6 @@
 package org.freedom.boot.service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,12 @@ import org.freedom.boot.bean.CollectExample.Criteria;
 import org.freedom.boot.dao.BookMapper;
 import org.freedom.boot.dao.CollectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
+@CacheConfig(cacheNames="book")
 public class BookService {
 
 	@Autowired
@@ -26,7 +30,10 @@ public class BookService {
 	 * 
 	 * @return
 	 */
+	 
+	@Cacheable()
 	public List<Book> getBookList() {
+		System.out.println("执行查询书本集合");
 		BookExample bookExample=new BookExample();
 		bookExample.setOrderByClause("book_id");
 		return bookMapper.selectByExampleWithType(bookExample);
@@ -39,7 +46,9 @@ public class BookService {
 	 * @param userId
 	 * @return
 	 */
+	@Cacheable(key="#bookId+#userId") 
 	public BookWithCollect getBook(Integer bookId, Integer userId) {
+		System.out.println("执行查询");
 		
 		//查询收藏表，是否有该用户收集过该书
 		CollectExample collectExample = new CollectExample();
@@ -53,10 +62,17 @@ public class BookService {
 
 		return bookWithCollect;
 	}
+	
+	@Cacheable(key="#id")
+	public Book getDetailBook(Integer id)
+	{
+		System.out.println("执行查询");
+		return bookMapper.selectByPrimaryKey(id);
+	}
 
 }
 
-class BookWithCollect {
+class BookWithCollect implements Serializable {
 
 	Integer ifCollect;
 

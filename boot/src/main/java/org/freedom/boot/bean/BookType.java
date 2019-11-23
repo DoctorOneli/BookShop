@@ -1,8 +1,10 @@
 package org.freedom.boot.bean;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotBlank;
 
-public class BookType {
+public class BookType implements Serializable {
     private Integer bookTypeId;
 
     @NotBlank(message="不能为空")

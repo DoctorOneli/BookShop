@@ -16,7 +16,7 @@ server:
 upload:
   path:
     #正式目录
-    formal: /usr/java/         #D:/java/(windows路径)      
+    formal: D:/java/         #D:/java/(windows路径)      
    
 
 #Linux环境的目录
@@ -40,8 +40,14 @@ spring:
   servlet:
     multipart:
       max-file-size: 1MB
- 
-
+      
+#缓存配置      
+  cache:
+    type: redis
+    cache-names:
+      - book
+    redis:
+      time-to-live: 1800s
 
 #数据库连接配置
   datasource:
@@ -54,8 +60,8 @@ spring:
   redis:
     database: 0
     host: 127.0.0.1
-    port: 6379
     password: ooq666
+    port: 6379
 #资源访问
   resources:
     static-locations: file:${upload.path.formal},classpath:/static/

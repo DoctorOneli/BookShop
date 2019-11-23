@@ -1,5 +1,6 @@
 package org.freedom.boot.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.Digits;
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class Book {
+public class Book implements Serializable {
 	private Integer bookId;
 
 	@NotBlank(message="名称不能为空")
