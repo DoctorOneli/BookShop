@@ -1,4 +1,4 @@
-package org.freedom.boot;
+package org.freedom.boot.config;
 
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -1,4 +1,4 @@
-package org.freedom.boot;
+package org.freedom.boot.config;
 
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.ErrorPageRegistrar;

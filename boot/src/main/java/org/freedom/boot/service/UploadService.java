@@ -9,8 +9,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.freedom.boot.FilesConfig;
 import org.freedom.boot.bean.Msg;
+import org.freedom.boot.config.FilesConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ClassUtils;

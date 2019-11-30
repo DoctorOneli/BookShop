@@ -24,39 +24,71 @@ public class AdminBookService {
 	BookTypeMapper bookTypeMapper;
 
 	/**
-	 * 查询书本集合
+	 * 查询书本集合(可根据类型查询)
 	 * 
 	 * @return
 	 */
-	public List<Book> getBookList(Integer typeId, String condition) {
+	public List<Book> getBookList(Integer typeId) {
 
-		boolean ifFindByBookId=true;
+		BookExample bookExample = new BookExample();
+		Criteria criteria = bookExample.createCriteria();
+
+		if (typeId != 0) {
+			criteria.andBookTypeIdEqualTo(typeId);
+		}
+
+		bookExample.setOrderByClause("book_count DESC");
+		return bookMapper.selectByExampleWithType(bookExample);
+
+	}
+
+	/**
+	 * 根据书本编号查询书
+	 * 
+	 * @param typeId
+	 * @param condition
+	 * @return
+	 */
+	public List<Book> getBookListById(Integer typeId, String condition) {
+
 		BookExample bookExample = new BookExample();
 		Criteria criteriaBookId = bookExample.createCriteria();
-		Criteria criteriaBookName = bookExample.createCriteria();
+
 		if (condition != "") {
-			Pattern pattern = Pattern.compile("[0-9]*");
-			if (pattern.matcher(condition).matches()) {
-				criteriaBookId.andBookIdEqualTo(Integer.valueOf(condition));
-				criteriaBookName.andBookNameLike("%" + condition + "%");
-			} else {
-				criteriaBookName.andBookNameLike("%" + condition + "%");
-				ifFindByBookId=false;
-			}
-				 
+			criteriaBookId.andBookIdEqualTo(Integer.valueOf(condition));
 		}
 
 		if (typeId != 0) {
-			if(ifFindByBookId)
-			{
-				criteriaBookId.andBookTypeIdEqualTo(typeId);
-			}
-		
-			criteriaBookName.andBookTypeIdEqualTo(typeId);
+			criteriaBookId.andBookTypeIdEqualTo(typeId);
 		}
 
 		bookExample.setOrderByClause("book_count DESC");
 		bookExample.or(criteriaBookId);
+		return bookMapper.selectByExampleWithType(bookExample);
+
+	}
+
+	/**
+	 * 根据书本名字模糊查询书
+	 * 
+	 * @param typeId
+	 * @param condition
+	 * @return
+	 */
+	public List<Book> getBookListByName(Integer typeId, String condition) {
+
+		BookExample bookExample = new BookExample();
+		Criteria criteriaBookName = bookExample.createCriteria();
+		if (condition != "") {
+			criteriaBookName.andBookNameLike("%" + condition + "%");
+		}
+
+		if (typeId != 0) {
+
+			criteriaBookName.andBookTypeIdEqualTo(typeId);
+		}
+
+		bookExample.setOrderByClause("book_count DESC");
 		bookExample.or(criteriaBookName);
 		return bookMapper.selectByExampleWithType(bookExample);
 
@@ -68,9 +100,9 @@ public class AdminBookService {
 	 * @return
 	 */
 	public List<BookType> getBookTypeList() {
-        BookTypeExample bookTypeExample=new BookTypeExample();
-        org.freedom.boot.bean.BookTypeExample.Criteria criteria=bookTypeExample.createCriteria();
-        criteria.andTypeNameNotEqualTo("全部");
+		BookTypeExample bookTypeExample = new BookTypeExample();
+		org.freedom.boot.bean.BookTypeExample.Criteria criteria = bookTypeExample.createCriteria();
+		criteria.andTypeNameNotEqualTo("全部");
 		return bookTypeMapper.selectByExample(bookTypeExample);
 
 	}
@@ -117,7 +149,7 @@ public class AdminBookService {
 	public int deleteBook(Integer bookId) {
 		return bookMapper.deleteByPrimaryKey(bookId);
 	}
-	
+
 	/**
 	 * 根据主键更新书本类型
 	 * 
@@ -137,7 +169,7 @@ public class AdminBookService {
 	public int deleteBookType(Integer bookTypeId) {
 		return bookTypeMapper.deleteByPrimaryKey(bookTypeId);
 	}
-	
+
 	/**
 	 * 添加书本类型
 	 * 
@@ -146,9 +178,7 @@ public class AdminBookService {
 	 */
 	public int addBookType(BookType type) {
 		return bookTypeMapper.insertSelective(type);
-		 
+
 	}
-	
-	
 
 }

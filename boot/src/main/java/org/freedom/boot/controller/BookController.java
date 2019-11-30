@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.freedom.boot.bean.Book;
 import org.freedom.boot.bean.Msg;
+import org.freedom.boot.service.AdminEvaluateService;
 import org.freedom.boot.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,9 @@ public class BookController {
 
 	@Autowired
 	BookService bookService;
+	
+	@Autowired
+	AdminEvaluateService adminEvaluateService;
 	
 	
 	/**
@@ -48,6 +52,13 @@ public class BookController {
 	{
 		return Msg.success().add("book", bookService.getBook(book_id, user_id));
 	}
+	
+	@GetMapping("/evaluate")
+	public Msg getEvaluateList(Integer id)
+	{
+		return Msg.success().add("list", adminEvaluateService.getEvaluateList(id));
+	}
+	
 	
 	 
 	 

@@ -1,4 +1,4 @@
-package org.freedom.boot;
+package org.freedom.boot.config;
 
 import org.apache.catalina.connector.Connector;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;

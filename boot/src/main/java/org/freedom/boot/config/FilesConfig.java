@@ -1,4 +1,4 @@
-package org.freedom.boot;
+package org.freedom.boot.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -2,13 +2,20 @@ package org.freedom.boot.bean;
 
 import java.util.Date;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+
 public class Evaluate {
+	
+	
+	
     private Integer evaluateId;
 
     private Integer orderItemId;
 
     private Integer userId;
-
+   
+    @NotBlank(message="不能为空")
     private String content;
 
     private Date evaluateTime;
@@ -23,9 +30,62 @@ public class Evaluate {
 
     private Integer ifAnonymous;
 
-    private String img;
+    private Integer adminId;
 
-    public Integer getEvaluateId() {
+    private String img;
+    
+    private User user;
+    
+    private OrderItem orderItem;
+    
+    
+
+    public Evaluate() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+    
+
+	public Evaluate(Integer evaluateId, Integer orderItemId, Integer userId, String content, Date evaluateTime,
+			Integer logisticsGrade, Integer serviceGrade, Integer goodsGrade, Integer toEvaluateId, Integer ifAnonymous,
+			Integer adminId, String img, User user, OrderItem orderItem) {
+		super();
+		this.evaluateId = evaluateId;
+		this.orderItemId = orderItemId;
+		this.userId = userId;
+		this.content = content;
+		this.evaluateTime = evaluateTime;
+		this.logisticsGrade = logisticsGrade;
+		this.serviceGrade = serviceGrade;
+		this.goodsGrade = goodsGrade;
+		this.toEvaluateId = toEvaluateId;
+		this.ifAnonymous = ifAnonymous;
+		this.adminId = adminId;
+		this.img = img;
+		this.user = user;
+		this.orderItem = orderItem;
+	}
+
+
+
+	public OrderItem getOrderItem() {
+		return orderItem;
+	}
+
+	public void setOrderItem(OrderItem orderItem) {
+		this.orderItem = orderItem;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Integer getEvaluateId() {
         return evaluateId;
     }
 
@@ -103,6 +163,14 @@ public class Evaluate {
 
     public void setIfAnonymous(Integer ifAnonymous) {
         this.ifAnonymous = ifAnonymous;
+    }
+
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
     }
 
     public String getImg() {

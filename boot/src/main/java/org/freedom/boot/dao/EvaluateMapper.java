@@ -16,6 +16,8 @@ public interface EvaluateMapper {
 
     int insertSelective(Evaluate record);
 
+    List<Evaluate> selectByExampleWithUser(EvaluateExample example);
+    
     List<Evaluate> selectByExampleWithBLOBs(EvaluateExample example);
 
     List<Evaluate> selectByExample(EvaluateExample example);

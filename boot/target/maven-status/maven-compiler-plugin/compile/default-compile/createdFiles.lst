@@ -29,7 +29,6 @@ org\freedom\boot\bean\BookWithBLOBs.class
 org\freedom\boot\bean\OrderItem.class
 org\freedom\boot\bean\OrderRefundExample$GeneratedCriteria.class
 org\freedom\boot\bean\CancelReasonExample.class
-org\freedom\boot\TransactionAdviceConfig.class
 org\freedom\boot\bean\OrderItemExample.class
 org\freedom\boot\bean\AdminRoleExample$GeneratedCriteria.class
 org\freedom\boot\bean\UserInfo.class
@@ -102,14 +101,11 @@ org\freedom\boot\bean\EvaluateLike.class
 org\freedom\boot\bean\Admin.class
 org\freedom\boot\bean\OrderExample$Criterion.class
 org\freedom\boot\bean\OrderRefundExample.class
-org\freedom\boot\TomcatConfig.class
 org\freedom\boot\dao\OrderCancelMapper.class
 org\freedom\boot\bean\CollectExample$Criteria.class
-org\freedom\boot\TomcatConfig$1.class
 org\freedom\boot\bean\EvaluateExample$GeneratedCriteria.class
 org\freedom\boot\bean\Power.class
 org\freedom\boot\bean\UserExample.class
-org\freedom\boot\RedisController.class
 org\freedom\boot\dao\AreaMapper.class
 org\freedom\boot\bean\PowerRoleExample$Criterion.class
 org\freedom\boot\bean\ShopExample.class

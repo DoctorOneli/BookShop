@@ -17,8 +17,11 @@ import javax.validation.Valid;
 import org.freedom.boot.bean.Book;
 import org.freedom.boot.bean.BookType;
 import org.freedom.boot.bean.BookWithBLOBs;
+import org.freedom.boot.bean.Evaluate;
+import org.freedom.boot.bean.EvaluateSubmit;
 import org.freedom.boot.bean.Msg;
 import org.freedom.boot.service.AdminBookService;
+import org.freedom.boot.service.AdminEvaluateService;
 import org.freedom.boot.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
@@ -45,6 +48,9 @@ public class AdminBookController {
 
 	@Autowired
 	AdminBookService adminBookService;
+	
+	@Autowired
+	AdminEvaluateService adminEvaluateService;
 
 	@Autowired
 	UploadService uploadService;
@@ -57,9 +63,43 @@ public class AdminBookController {
 	 */
 	@GetMapping("/book")
 	public Msg getBookList(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
-			@RequestParam("type_id") Integer bookTypeId, @RequestParam("condition") String condition) {
+			@RequestParam("type_id") Integer bookTypeId) {
 		PageHelper.startPage(pageIndex, 10);
-		List<Book> bookList = adminBookService.getBookList(bookTypeId, condition);
+		List<Book> bookList = adminBookService.getBookList(bookTypeId);
+		PageInfo pageInfo = new PageInfo(bookList);
+		return Msg.success().add("book", pageInfo);
+
+	}
+	
+	/**
+	 * 返回管理端的书本集合(根据id查询)，分页查询
+	 * @param pageIndex
+	 * @param typeId
+	 * @param condition
+	 * @return
+	 */
+	@GetMapping("/bookbyid")
+	public Msg getBookListById(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
+			@RequestParam("type_id") Integer typeId, @RequestParam("condition") String condition) {
+		PageHelper.startPage(pageIndex, 10);
+		List<Book> bookList = adminBookService.getBookListById(typeId, condition);
+		PageInfo pageInfo = new PageInfo(bookList);
+		return Msg.success().add("book", pageInfo);
+
+	}
+	
+	/**
+	 * 返回管理端的书本集合(根据名字模糊查询)，分页查询
+	 * @param pageIndex
+	 * @param typeId
+	 * @param condition
+	 * @return
+	 */
+	@GetMapping("/bookbyname")
+	public Msg getBookListByName(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
+			@RequestParam("type_id") Integer typeId, @RequestParam("condition") String condition) {
+		PageHelper.startPage(pageIndex, 10);
+		List<Book> bookList = adminBookService.getBookListByName(typeId, condition);
 		PageInfo pageInfo = new PageInfo(bookList);
 		return Msg.success().add("book", pageInfo);
 
@@ -255,5 +295,53 @@ public class AdminBookController {
 			return Msg.fail().add("result", "添加失败");
 		}
 	}
+	
+	/**
+	 * 根据书本id获取评价列表
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/evaluate")
+	public Msg getEvaluateList(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,Integer id)
+	{
+		PageHelper.startPage(pageIndex, 10);
+		PageInfo pageInfo = new PageInfo(adminEvaluateService.getEvaluateList(id));
+		return Msg.success().add("list", pageInfo);
+	}
+	
+	
+	 
+	 
+	
+	/**
+	 * 添加评论
+	 * @param book
+	 * @param bindingResult
+	 * @return
+	 */
+	@PostMapping("/evaluate")
+	public Msg addEvaluate(@Valid @RequestBody EvaluateSubmit evaluateSubmit,BindingResult bindingResult) {
+		  
+		if (bindingResult.hasErrors()) {
+			List<String> errors=new ArrayList<String>();
+			List<ObjectError> all=bindingResult.getAllErrors();
+			for (ObjectError objectError : all) {
+				errors.add(objectError.getDefaultMessage());
+			}
+			
+			return Msg.fail().add("result", "请好好填信息，谢谢").add("data", errors);
+		}
+		
+		int Id = adminEvaluateService.addEvaluate(evaluateSubmit.getEvaluate(), evaluateSubmit.getIfHyperAdmin());
+		if (Id > 0) {
+			return Msg.success().add("result", Id);
+		}
+
+		else {
+			return Msg.success().fail();
+		}
+	}
+	
+	
 
 }

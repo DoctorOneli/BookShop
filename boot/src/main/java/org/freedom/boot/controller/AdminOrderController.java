@@ -81,5 +81,11 @@ public class AdminOrderController {
 			return Msg.fail();
 		}
 	}
+	
+	@GetMapping("/hyper")
+	public Msg ifHyperAdmin()
+	{
+		return Msg.success();
+	}
 
 }
