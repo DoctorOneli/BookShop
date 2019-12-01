@@ -1,5 +1,4 @@
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\BcTest.java
-E:\BookShopGit\boot\src\main\java\org\freedom\boot\controller\AdminRoleController.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\OrderCancelMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\AdminEvaluateService.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\BookMapper.java
@@ -11,6 +10,7 @@ E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\UserInfoExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\controller\AdminUserController.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\UserExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\UserInfo.java
+E:\BookShopGit\boot\src\main\java\org\freedom\boot\config\CorsConfig.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\CancelReason.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\config\FilesConfig.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\ShopCartExample.java
@@ -63,11 +63,11 @@ E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\AdminRoleMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\OrderCancel.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\OrderRefundMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\AdminBookService.java
-E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\AdminRoleService.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\ShopExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\config\TomcatConfig.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\OrderRefund.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\PowerRoleMapper.java
+E:\BookShopGit\boot\src\main\java\org\freedom\boot\controller\AdminHyperController.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\User.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\Role.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\CancelReasonMapper.java
@@ -76,6 +76,7 @@ E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\OrderItemMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\Order.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\App.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\OrderItem.java
+E:\BookShopGit\boot\src\main\java\org\freedom\boot\service\AdminHyperService.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\ShopCartMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\Address.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\OrderStateMapper.java

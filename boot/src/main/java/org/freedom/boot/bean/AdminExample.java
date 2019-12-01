@@ -423,6 +423,11 @@ public class AdminExample {
             addCriterion("locked not between", value1, value2, "locked");
             return (Criteria) this;
         }
+        
+        public Criteria andRoleIdEqualTo(Integer value) {
+            addCriterion("tbl_admin_role.role_id =", value, "roleId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

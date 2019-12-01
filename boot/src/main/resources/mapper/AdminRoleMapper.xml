@@ -5,17 +5,6 @@
 		<id column="user_role_id" jdbcType="INTEGER" property="userRoleId" />
 		<result column="admin_id" jdbcType="INTEGER" property="adminId" />
 		<result column="role_id" jdbcType="INTEGER" property="roleId" />
-		<association property="role" column="role_id"
-			javaType="org.freedom.boot.bean.Role">
-			<id column="role_id" property="roleId" />
-			<result column="name" property="name" />
-			<result column="name_zh" property="nameZh" />
-		</association>
-		<association property="admin" column="admin_id"
-			javaType="org.freedom.boot.bean.AdminInfo">
-			<id column="admin_id" property="adminId" />
-			<result column="username" property="username" />
-		</association>
 	</resultMap>
 	<sql id="Example_Where_Clause">
 		<where>
@@ -83,14 +72,9 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		tbl_role.name_zh,
-		tbl_role.`name`,
 		tbl_admin_role.role_id,
 		tbl_admin_role.admin_id,
-		tbl_admin_role.user_role_id,
-		tbl_admin.admin_id,
-		tbl_admin.`password`,
-		tbl_admin.username
+		tbl_admin_role.user_role_id
 	</sql>
 	<select id="selectByExample" parameterType="org.freedom.boot.bean.AdminRoleExample"
 		resultMap="BaseResultMap">
@@ -100,9 +84,7 @@
 		</if>
 		<include refid="Base_Column_List" />
 		FROM
-		tbl_admin
-		INNER JOIN tbl_admin_role ON tbl_admin_role.admin_id = tbl_admin.admin_id
-		INNER JOIN tbl_role ON tbl_admin_role.role_id = tbl_role.role_id
+		tbl_admin_role
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
