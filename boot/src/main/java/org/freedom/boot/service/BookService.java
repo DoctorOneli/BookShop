@@ -33,7 +33,6 @@ public class BookService {
 	 
 	@Cacheable()
 	public List<Book> getBookList() {
-		System.out.println("执行查询书本集合");
 		BookExample bookExample=new BookExample();
 		bookExample.setOrderByClause("book_id");
 		return bookMapper.selectByExampleWithType(bookExample);

@@ -26,8 +26,9 @@ public interface OrderMapper {
     
     List<Order> selectByExampleWithAddress(OrderExample example);
     
-    
     Order selectByPrimaryKey(Integer orderId);
+    
+    Order selectOrderCancelByPrimaryKey(Integer orderId);
 
     int updateByExampleSelective(@Param("record") Order record, @Param("example") OrderExample example);
 
@@ -40,4 +41,6 @@ public interface OrderMapper {
     int updateByPrimaryKeyWithBLOBs(Order record);
 
     int updateByPrimaryKey(Order record);
+
+	
 }

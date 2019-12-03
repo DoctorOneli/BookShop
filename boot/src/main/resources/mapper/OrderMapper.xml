@@ -19,7 +19,25 @@
 		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 		<result column="order_state_id" jdbcType="INTEGER" property="orderStateId" />
 		<result column="address_id" jdbcType="INTEGER" property="addressId" />
+		<result column="order_no" property="orderNo" />
+		<result column="express_no" property="expressNo" />
+		<result column="express_company" property="expressCompany" />
 		<result column="flag" jdbcType="BIT" property="flag" />
+		<association property="address" column="address_id"
+			javaType="org.freedom.boot.bean.Address">
+			<id column="address_id" jdbcType="INTEGER" property="addressId" />
+			<result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+			<result column="receiver_phone" jdbcType="VARCHAR" property="receiverPhone" />
+			<result column="concrete_address" jdbcType="VARCHAR" property="concreteAddress" />
+			<result column="province" jdbcType="VARCHAR" property="province" />
+			<result column="city" jdbcType="VARCHAR" property="city" />
+			<result column="area" jdbcType="VARCHAR" property="area" />
+		</association>
+		<association property="user" column="user_id"
+			javaType="org.freedom.boot.bean.User">
+			<id column="user_id" jdbcType="INTEGER" property="userId" />
+			<result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+		</association>
 		<collection property="orderItem" column="order_id"
 			ofType="org.freedom.boot.bean.OrderItem">
 			<id column="order_item_id" property="orderItemId" />
@@ -34,7 +52,56 @@
 				<result column="book_cover" property="bookCover" />
 			</association>
 		</collection>
+
 	</resultMap>
+
+	<resultMap id="WithCancelResultMap" type="org.freedom.boot.bean.Order">
+		<id column="order_id" jdbcType="INTEGER" property="orderId" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="order_state_id" jdbcType="INTEGER" property="orderStateId" />
+		<result column="address_id" jdbcType="INTEGER" property="addressId" />
+		<result column="order_no" property="orderNo" />
+		<result column="flag" jdbcType="BIT" property="flag" />
+		<result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+		<association property="address" column="address_id"
+			javaType="org.freedom.boot.bean.Address">
+			<id column="address_id" jdbcType="INTEGER" property="addressId" />
+			<result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+			<result column="receiver_phone" jdbcType="VARCHAR" property="receiverPhone" />
+			<result column="concrete_address" jdbcType="VARCHAR" property="concreteAddress" />
+			<result column="province" jdbcType="VARCHAR" property="province" />
+			<result column="city" jdbcType="VARCHAR" property="city" />
+			<result column="area" jdbcType="VARCHAR" property="area" />
+		</association>
+		<association property="user" column="user_id"
+			javaType="org.freedom.boot.bean.User">
+			<id column="user_id" jdbcType="INTEGER" property="userId" />
+			<result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+		</association>
+		<association property="orderCancel" column="order_id"
+			javaType="org.freedom.boot.bean.OrderCancel">
+			<id column="order_cancel_id" jdbcType="INTEGER" property="orderCancelId" />
+			<result column="order_id" jdbcType="INTEGER" property="orderId" />
+			<result column="cancel_reason_id" jdbcType="INTEGER" property="cancelReasonId" />
+			<result column="detail" jdbcType="VARCHAR" property="detail" />
+		</association>
+		<collection property="orderItem" column="order_id"
+			ofType="org.freedom.boot.bean.OrderItem">
+			<id column="order_item_id" property="orderItemId" />
+			<result column="count" property="count" />
+			<result column="price" property="price" />
+			<association property="book" column="book_id"
+				javaType="org.freedom.boot.bean.BookWithBLOBs">
+				<id column="book_id" property="bookId" />
+				<result column="book_name" property="bookName" />
+				<result column="book_author" property="bookAuthor" />
+				<result column="book_img" property="bookImg" />
+				<result column="book_cover" property="bookCover" />
+			</association>
+		</collection>
+
+	</resultMap>
+
 
 	<resultMap id="WithAddressResultMap" type="org.freedom.boot.bean.Order">
 		<id column="order_id" jdbcType="INTEGER" property="orderId" />
@@ -51,16 +118,13 @@
 			javaType="org.freedom.boot.bean.User">
 			<id column="user_id" property="userId" />
 			<result column="nick_name" property="nickName" />
+			<result column="phone" property="phone" />
 		</association>
 		<association property="orderState" column="order_state_id"
 			javaType="org.freedom.boot.bean.OrderState">
 			<id column="order_state_id" property="orderStateId" />
 			<result column="name" property="name" />
 		</association>
-
-
-
-
 	</resultMap>
 
 
@@ -182,6 +246,60 @@
 		`tbl_order`.`flag` AS `flag`
 	</sql>
 
+	<sql id="AdminOrderColumnList">
+		`tbl_order`.`order_id` AS `order_id`,
+		`tbl_order`.`create_time` AS `create_time`,
+		`tbl_order`.`order_state_id` AS `order_state_id`,
+		`tbl_order`.`user_id` AS `user_id`,
+		`tbl_order`.`address_id` AS
+		`address_id`,
+		`tbl_order`.`remark` AS `remark`,
+		`tbl_order`.`order_no`
+		AS `order_no`,
+		`tbl_order`.`express_no` AS `express_no`,
+		`tbl_order`.`express_company` AS `express_company`,
+		`tbl_order_item`.`order_item_id` AS `order_item_id`,
+		`tbl_order_item`.`book_id` AS `book_id`,
+		`tbl_order_item`.`count` AS
+		`count`,
+		`tbl_order_item`.`price` AS `price`,
+		`tbl_book`.`book_name` AS
+		`book_name`,
+		`tbl_book`.`book_price` AS `book_price`,
+		`tbl_address`.`receiver_name` AS `receiver_name`,
+		`tbl_address`.`receiver_phone` AS `receiver_phone`,
+		`tbl_address`.`concrete_address` AS `concrete_address`,
+		`tbl_address`.`province` AS `province`,
+		`tbl_address`.`city` AS `city`,
+		`tbl_address`.`area` AS `area`,
+		`tbl_user`.`nick_name` AS `nick_name`
+	</sql>
+
+	<sql id="AdminOrderCancelColumnList">
+		`tbl_order`.`order_id` AS `order_id`,
+		`tbl_order`.`create_time` AS `create_time`,
+		`tbl_order`.`order_state_id` AS `order_state_id`,
+		`tbl_order`.`user_id` AS `user_id`,
+		`tbl_order`.`address_id` AS `address_id`,
+		`tbl_order`.`remark` AS `remark`,
+		`tbl_order`.`order_no` AS `order_no`,
+		`tbl_order_cancel`.`order_cancel_id` AS `order_cancel_id`,
+		`tbl_order_cancel`.`cancel_reason_id` AS `cancel_reason_id`,
+		`tbl_order_cancel`.`detail` AS `detail`,
+		`tbl_user`.`nick_name` AS `nick_name`,
+		`tbl_order_item`.`book_id` AS `book_id`,
+		`tbl_order_item`.`count` AS `count`,
+		`tbl_order_item`.`price` AS `price`,
+		`tbl_order_item`.`order_item_id` AS `order_item_id`,
+		`tbl_book`.`book_name` AS `book_name`,
+		`tbl_address`.`receiver_name` AS `receiver_name`,
+		`tbl_address`.`receiver_phone` AS `receiver_phone`,
+		`tbl_address`.`concrete_address` AS `concrete_address`,
+		`tbl_address`.`province` AS `province`,
+		`tbl_address`.`city` AS `city`,
+		`tbl_address`.`area` AS `area`
+	</sql>
+
 
 
 
@@ -282,23 +400,61 @@
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
 		resultMap="ResultMapWithBLOBs">
 		select
-		<include refid="All_Column_List" />
+		<include refid="AdminOrderColumnList" />
 		FROM
 		(
 		(
+		(
+		(
 		( `tbl_order` JOIN `tbl_order_item` ON ( (
-		`tbl_order_item`.`order_id` =
-		`tbl_order`.`order_id` ) ) )
+		`tbl_order_item`.`order_id`
+		= `tbl_order`.`order_id` ) ) )
 		JOIN
-		`tbl_book`
-		ON ( ( `tbl_order_item`.`book_id` = `tbl_book`.`book_id` ) )
+		`tbl_book` ON ( ( `tbl_order_item`.`book_id` = `tbl_book`.`book_id` )
 		)
-		JOIN
-		`tbl_address` ON ( ( `tbl_order`.`address_id` =
+		)
+		JOIN `tbl_address` ON ( ( `tbl_order`.`address_id` =
 		`tbl_address`.`address_id` ) )
 		)
-		where tbl_order.order_id = #{orderId,jdbcType=INTEGER}
+		)
+		JOIN `tbl_user` ON ( ( (
+		`tbl_order`.`user_id` = `tbl_user`.`user_id`
+		)
+		AND (
+		`tbl_address`.`user_id` = `tbl_user`.`user_id` ) ) )
+		)
+		where
+		tbl_order.order_id =
+		#{orderId,jdbcType=INTEGER}
 	</select>
+
+	<select id="selectOrderCancelByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="WithCancelResultMap">
+		select
+		<include refid="AdminOrderCancelColumnList" />
+		FROM
+		(
+		(
+		(
+		(
+		( `tbl_order` JOIN `tbl_order_cancel` ON ( (
+		`tbl_order_cancel`.`order_id` = `tbl_order`.`order_id` ) ) )
+		JOIN `tbl_order_item` ON ( ( `tbl_order_item`.`order_id` =
+		`tbl_order`.`order_id` ) )
+		)
+		JOIN `tbl_user` ON ( ( `tbl_order`.`user_id` = `tbl_user`.`user_id` ) )
+		)
+		JOIN `tbl_book` ON ( ( `tbl_order_item`.`book_id` = `tbl_book`.`book_id` )
+		)
+		)
+		JOIN `tbl_address` ON ( ( ( `tbl_address`.`user_id` = `tbl_user`.`user_id`
+		) AND ( `tbl_order`.`address_id` = `tbl_address`.`address_id` ) ) )
+		)
+		where
+		tbl_order.order_id =
+		#{orderId,jdbcType=INTEGER}
+	</select>
+
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
 		tbl_order
@@ -462,6 +618,12 @@
 			</if>
 			<if test="remark != null">
 				remark = #{remark,jdbcType=LONGVARCHAR},
+			</if>
+				<if test="expressNo != null">
+				express_no = #{expressNo,jdbcType=VARCHAR},
+			</if>
+				<if test="expressCompany != null">
+				express_company = #{expressCompany,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where order_id = #{orderId,jdbcType=INTEGER}

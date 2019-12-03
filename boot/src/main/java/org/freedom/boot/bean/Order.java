@@ -6,7 +6,6 @@ import java.util.List;
 public class Order {
 	private Integer orderId;
 
-	
 	private Date createTime;
 
 	private Integer orderStateId;
@@ -19,18 +18,28 @@ public class Order {
 
 	private String remark;
 
+	private String orderNo;
+
+	private String expressNo;
+
+	private String expressCompany;
+
 	private List<OrderItem> orderItem;
-	
+
 	private Address address;
-	
+
 	private OrderState orderState;
-	
+
 	private User user;
+	
+	private OrderCancel orderCancel;
 
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	public Order(Integer orderId, Date createTime, Integer orderStateId, Integer userId, Integer addressId,
 			Boolean flag, String remark) {
@@ -45,7 +54,14 @@ public class Order {
 	}
 	
 	
-	
+
+	public OrderCancel getOrderCancel() {
+		return orderCancel;
+	}
+
+	public void setOrderCancel(OrderCancel orderCancel) {
+		this.orderCancel = orderCancel;
+	}
 
 	public User getUser() {
 		return user;
@@ -134,4 +150,29 @@ public class Order {
 	public void setRemark(String remark) {
 		this.remark = remark == null ? null : remark.trim();
 	}
+
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public String getExpressNo() {
+		return expressNo;
+	}
+
+	public void setExpressNo(String expressNo) {
+		this.expressNo = expressNo;
+	}
+
+	public String getExpressCompany() {
+		return expressCompany;
+	}
+
+	public void setExpressCompany(String expressCompany) {
+		this.expressCompany = expressCompany;
+	}
+
 }

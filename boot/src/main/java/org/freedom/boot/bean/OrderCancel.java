@@ -8,8 +8,9 @@ public class OrderCancel {
     private Integer cancelReasonId;
 
     private String detail;
+    
 
-    public Integer getOrderCancelId() {
+	public Integer getOrderCancelId() {
         return orderCancelId;
     }
 

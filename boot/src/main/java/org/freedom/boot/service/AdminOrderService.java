@@ -33,9 +33,9 @@ public class AdminOrderService {
 	 */
 	public List<Order> getOrderList(Integer orderStateId, Date date, String condition) {
 
-		boolean ifFindByOrderId=true;
+		boolean ifFindByOrderId = true;
 		OrderExample orderExample = new OrderExample();
-		 
+
 		Criteria criteriaOrderId = orderExample.createCriteria();
 		Criteria criteriaUserName = orderExample.createCriteria();
 		if (condition != "") {
@@ -45,41 +45,37 @@ public class AdminOrderService {
 				criteriaUserName.andUserNameLike("%" + condition + "%");
 			} else {
 				criteriaUserName.andUserNameLike("%" + condition + "%");
-				ifFindByOrderId=false;
+				ifFindByOrderId = false;
 			}
 		}
 
 		if (date != null) {
-			if(ifFindByOrderId)
-			{
-			criteriaOrderId.andCreateTimeGreaterThanOrEqualTo(date);
+			if (ifFindByOrderId) {
+				criteriaOrderId.andCreateTimeGreaterThanOrEqualTo(date);
 			}
 			criteriaUserName.andCreateTimeGreaterThanOrEqualTo(date);
 			Date date2 = date;
 			Calendar c = Calendar.getInstance();
 			c.setTime(date2);
 			c.add(Calendar.DATE, 1);
-			if(ifFindByOrderId)
-			{
+			if (ifFindByOrderId) {
 				criteriaOrderId.andCreateTimeLessThan(c.getTime());
 			}
-		
+
 			criteriaUserName.andCreateTimeLessThan(c.getTime());
 
 		}
 
 		if (orderStateId != 10) {
 			if (orderStateId == 3) {
-				if(ifFindByOrderId)
-				{
+				if (ifFindByOrderId) {
 					criteriaOrderId.andOrderStateIdBetween(3, 4);
 				}
-				
+
 				criteriaUserName.andOrderStateIdBetween(3, 4);
 
 			} else {
-				if(ifFindByOrderId)
-				{
+				if (ifFindByOrderId) {
 					criteriaOrderId.andOrderStateIdEqualTo(orderStateId);
 				}
 				criteriaUserName.andOrderStateIdEqualTo(orderStateId);
@@ -99,16 +95,65 @@ public class AdminOrderService {
 	 * @return
 	 */
 	public Order getOrderByOrderId(Integer orderId) {
-		return orderMapper.selectByPrimaryKey(orderId);
+
+		Order order = orderMapper.selectByPrimaryKey(orderId);
+
+		if (order.getOrderStateId() == 5) {
+			return null;
+		}
+
+		else {
+			return order;
+		}
 	}
 
 	/**
 	 * 更新订单
+	 * 
 	 * @param order
 	 * @return
 	 */
 	public int updateOrderState(Order order) {
 		return orderMapper.updateByPrimaryKeySelective(order);
 	}
+
+	/**
+	 * 查询取消订单
+	 * 
+	 * @param orderId
+	 * @return
+	 */
+	public Order getOrderCancelByOrderId(Integer orderId) {
+		Order order = orderMapper.selectOrderCancelByPrimaryKey(orderId);
+
+		if (order.getOrderStateId() == 5) {
+			return order;
+		}
+
+		else {
+			return null;
+		}
+	}
+	
+	/**
+	 * 发货
+	 * @param orderId
+	 * @param expressNo
+	 * @param expressCompany
+	 * @return
+	 */
+	public int updateOrderExpress(Integer orderId, String expressNo,String expressCompany) {
+		 
+		Order order=orderMapper.selectByPrimaryKey(orderId);
+		order.setExpressNo(expressNo);
+		order.setExpressCompany(expressCompany);
+		order.setOrderStateId(2);
+		
+		return orderMapper.updateByPrimaryKeySelective(order);
+
+	}
+	
+	 
+	
 
 }

@@ -53,35 +53,60 @@ public class AdminOrderController {
 		return Msg.success().add("order", pageInfo);
 
 	}
-	
+
 	/**
-	 * 根据订单id返回订单详情
+	 * 根据订单id返回订单详情（非取消订单类型）
+	 * 
 	 * @param orderId
 	 * @return
 	 */
 	@GetMapping("/order/{id}")
-	public Msg getOrderByOrderId(@PathVariable("id") Integer orderId)
-	{
-		return Msg.success().add("order", adminOrderService.getOrderByOrderId(orderId)); 
+	public Msg getOrderByOrderId(@PathVariable("id") Integer orderId) {
+		return Msg.success().add("order", adminOrderService.getOrderByOrderId(orderId));
 	}
-	
+
+	/**
+	 * 根据订单id返回取消订单详情
+	 * 
+	 * @param orderId
+	 * @return
+	 */
+	@GetMapping("/ordercancel/{id}")
+	public Msg getOrderCancelByOrderId(@PathVariable("id") Integer orderId) {
+		return Msg.success().add("order", adminOrderService.getOrderCancelByOrderId(orderId));
+	}
+
 	/**
 	 * 更新订单状态
+	 * 
 	 * @param order
 	 * @return
 	 */
 	@PutMapping("/order")
-	public Msg updateOrderState(@RequestBody Order order)
-	{
-		if(adminOrderService.updateOrderState(order)==1)
-		{
+	public Msg updateOrderState(@RequestBody Order order) {
+		if (adminOrderService.updateOrderState(order) == 1) {
 			return Msg.success().add("result", "更新成功");
-		}
-		else {
+		} else {
 			return Msg.fail();
 		}
 	}
-	
-	
 
+	/**
+	 * 发货
+	 * @param orderId
+	 * @param expressNo
+	 * @param expressCompany
+	 * @return
+	 */
+	@PutMapping("/orderexpress")
+	public Msg updateOrderExpress(Integer orderId, String expressNo, String expressCompany) {
+		System.out.println(expressNo);
+		System.out.println(expressCompany);
+		if (adminOrderService.updateOrderExpress(orderId,expressNo,expressCompany) == 1) {
+			return Msg.success().add("result", "更新成功");
+		} else {
+			return Msg.fail();
+		}
+		
+	}
 }

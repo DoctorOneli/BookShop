@@ -72,6 +72,7 @@ public class AdminHyperService {
 
 	/**
 	 * 重置密码
+	 * 
 	 * @param adminId
 	 * @param password
 	 * @return
@@ -99,6 +100,11 @@ public class AdminHyperService {
 	 */
 	public int addAdmin(String username, String password, Integer roleId) {
 		AdminInfo adminInfo = new AdminInfo();
+
+		if (adminMapper.selectByUserName(username) != null) {
+			return -1;
+		}
+
 		adminInfo.setUsername(username);
 
 		// BC加密
@@ -124,6 +130,7 @@ public class AdminHyperService {
 
 	/**
 	 * 根据主键删除管理员
+	 * 
 	 * @param id
 	 * @return
 	 */

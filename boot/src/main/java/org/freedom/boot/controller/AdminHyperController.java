@@ -85,10 +85,14 @@ public class AdminHyperController {
 	@PostMapping("/role")
 	public Msg addAdmin(@Pattern(regexp="(^[A-Za-z0-9]{2,12}$)",message="用户名可含有英文、数字,长度为2到12位") String username ,@Pattern(regexp="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{6,16}$",message="必须包含一个大写，一个小写字母，一个数字，长度为6到16位") String password , Integer roleId) {
 		
-		if (adminHyperService.addAdmin(username,password,roleId) == 1) {
+		int result=adminHyperService.addAdmin(username,password,roleId);
+		if ( result== 1) {
 			return Msg.success().add("result", "更新成功");
-		} else {
-			return Msg.fail().add("result", "更新失败");
+		} else if (result==-1){
+			return Msg.fail().add("result", "已存在该用户");
+		}
+		else {
+			return Msg.fail();
 		}
 	}
 	
