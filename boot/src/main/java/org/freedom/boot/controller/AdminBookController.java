@@ -48,7 +48,7 @@ public class AdminBookController {
 
 	@Autowired
 	AdminBookService adminBookService;
-	
+
 	@Autowired
 	AdminEvaluateService adminEvaluateService;
 
@@ -63,16 +63,17 @@ public class AdminBookController {
 	 */
 	@GetMapping("/book")
 	public Msg getBookList(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
-			@RequestParam("type_id") Integer bookTypeId) {
+			@RequestParam("type_id") Integer bookTypeId, Integer publicState) {
 		PageHelper.startPage(pageIndex, 10);
-		List<Book> bookList = adminBookService.getBookList(bookTypeId);
+		List<Book> bookList = adminBookService.getBookList(bookTypeId, publicState);
 		PageInfo pageInfo = new PageInfo(bookList);
 		return Msg.success().add("book", pageInfo);
 
 	}
-	
+
 	/**
 	 * 返回管理端的书本集合(根据id查询)，分页查询
+	 * 
 	 * @param pageIndex
 	 * @param typeId
 	 * @param condition
@@ -80,16 +81,17 @@ public class AdminBookController {
 	 */
 	@GetMapping("/bookbyid")
 	public Msg getBookListById(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
-			@RequestParam("type_id") Integer typeId, @RequestParam("condition") String condition) {
+			@RequestParam("condition") String condition) {
 		PageHelper.startPage(pageIndex, 10);
-		List<Book> bookList = adminBookService.getBookListById(typeId, condition);
+		List<Book> bookList = adminBookService.getBookListById(condition);
 		PageInfo pageInfo = new PageInfo(bookList);
 		return Msg.success().add("book", pageInfo);
 
 	}
-	
+
 	/**
 	 * 返回管理端的书本集合(根据名字模糊查询)，分页查询
+	 * 
 	 * @param pageIndex
 	 * @param typeId
 	 * @param condition
@@ -97,9 +99,9 @@ public class AdminBookController {
 	 */
 	@GetMapping("/bookbyname")
 	public Msg getBookListByName(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
-			@RequestParam("type_id") Integer typeId, @RequestParam("condition") String condition) {
+			@RequestParam("condition") String condition) {
 		PageHelper.startPage(pageIndex, 10);
-		List<Book> bookList = adminBookService.getBookListByName(typeId, condition);
+		List<Book> bookList = adminBookService.getBookListByName(condition);
 		PageInfo pageInfo = new PageInfo(bookList);
 		return Msg.success().add("book", pageInfo);
 
@@ -140,18 +142,18 @@ public class AdminBookController {
 	 * @return
 	 */
 	@PostMapping("/book")
-	public Msg addBook(@Valid @RequestBody BookWithBLOBs book,BindingResult bindingResult) {
-		
+	public Msg addBook(@Valid @RequestBody BookWithBLOBs book, BindingResult bindingResult) {
+
 		if (bindingResult.hasErrors()) {
-			List<String> errors=new ArrayList<String>();
-			List<ObjectError> all=bindingResult.getAllErrors();
+			List<String> errors = new ArrayList<String>();
+			List<ObjectError> all = bindingResult.getAllErrors();
 			for (ObjectError objectError : all) {
 				errors.add(objectError.getDefaultMessage());
 			}
-			
+
 			return Msg.fail().add("result", "请好好填信息，谢谢").add("data", errors);
 		}
-		
+
 		int bookId = adminBookService.addBook(book);
 		if (bookId > 0) {
 			return Msg.success().add("result", bookId);
@@ -195,18 +197,18 @@ public class AdminBookController {
 	 * @return
 	 */
 	@PutMapping("/book")
-	public Msg updateBook(@Valid @RequestBody BookWithBLOBs book,BindingResult bindingResult) {
-		
+	public Msg updateBook(@Valid @RequestBody BookWithBLOBs book, BindingResult bindingResult) {
+
 		if (bindingResult.hasErrors()) {
-			List<String> errors=new ArrayList<String>();
-			List<ObjectError> all=bindingResult.getAllErrors();
+			List<String> errors = new ArrayList<String>();
+			List<ObjectError> all = bindingResult.getAllErrors();
 			for (ObjectError objectError : all) {
 				errors.add(objectError.getDefaultMessage());
 			}
-			
+
 			return Msg.fail().add("result", "请好好填信息，谢谢").add("data", errors);
 		}
-		
+
 		if (adminBookService.updateBook(book) == 1) {
 			return Msg.success().add("result", "更新成功");
 		} else {
@@ -252,18 +254,18 @@ public class AdminBookController {
 	 * @return
 	 */
 	@PutMapping("/booktype")
-	public Msg updateBookType(@Valid @RequestBody BookType bookType,BindingResult bindingResult) {
-		
+	public Msg updateBookType(@Valid @RequestBody BookType bookType, BindingResult bindingResult) {
+
 		if (bindingResult.hasErrors()) {
-			List<String> errors=new ArrayList<String>();
-			List<ObjectError> all=bindingResult.getAllErrors();
+			List<String> errors = new ArrayList<String>();
+			List<ObjectError> all = bindingResult.getAllErrors();
 			for (ObjectError objectError : all) {
 				errors.add(objectError.getDefaultMessage());
 			}
-			
+
 			return Msg.fail().add("result", "请好好填信息，谢谢").add("data", errors);
 		}
-		
+
 		if (adminBookService.updateBookType(bookType) == 1) {
 			return Msg.success().add("result", "更新成功");
 		} else {
@@ -278,60 +280,57 @@ public class AdminBookController {
 	 * @return
 	 */
 	@PostMapping("/booktype")
-	public Msg addBookType(@Valid @RequestBody BookType bookType,BindingResult bindingResult) {
+	public Msg addBookType(@Valid @RequestBody BookType bookType, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			List<String> errors=new ArrayList<String>();
-			List<ObjectError> all=bindingResult.getAllErrors();
+			List<String> errors = new ArrayList<String>();
+			List<ObjectError> all = bindingResult.getAllErrors();
 			for (ObjectError objectError : all) {
 				errors.add(objectError.getDefaultMessage());
 			}
-			
+
 			return Msg.fail().add("result", "请好好填信息，谢谢").add("data", errors);
 		}
-		
+
 		if (adminBookService.addBookType(bookType) == 1) {
 			return Msg.success().add("result", "添加成功");
 		} else {
 			return Msg.fail().add("result", "添加失败");
 		}
 	}
-	
+
 	/**
 	 * 根据书本id获取评价列表
+	 * 
 	 * @param id
 	 * @return
 	 */
 	@GetMapping("/evaluate")
-	public Msg getEvaluateList(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,Integer id)
-	{
+	public Msg getEvaluateList(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex, Integer id) {
 		PageHelper.startPage(pageIndex, 10);
 		PageInfo pageInfo = new PageInfo(adminEvaluateService.getEvaluateList(id));
 		return Msg.success().add("list", pageInfo);
 	}
-	
-	
-	 
-	 
-	
+
 	/**
 	 * 添加评论
+	 * 
 	 * @param book
 	 * @param bindingResult
 	 * @return
 	 */
 	@PostMapping("/evaluate")
-	public Msg addEvaluate(@Valid @RequestBody EvaluateSubmit evaluateSubmit,BindingResult bindingResult) {
-		  
+	public Msg addEvaluate(@Valid @RequestBody EvaluateSubmit evaluateSubmit, BindingResult bindingResult) {
+
 		if (bindingResult.hasErrors()) {
-			List<String> errors=new ArrayList<String>();
-			List<ObjectError> all=bindingResult.getAllErrors();
+			List<String> errors = new ArrayList<String>();
+			List<ObjectError> all = bindingResult.getAllErrors();
 			for (ObjectError objectError : all) {
 				errors.add(objectError.getDefaultMessage());
 			}
-			
+
 			return Msg.fail().add("result", "请好好填信息，谢谢").add("data", errors);
 		}
-		
+
 		int Id = adminEvaluateService.addEvaluate(evaluateSubmit.getEvaluate(), evaluateSubmit.getIfHyperAdmin());
 		if (Id > 0) {
 			return Msg.success().add("result", Id);
@@ -341,7 +340,21 @@ public class AdminBookController {
 			return Msg.success().fail();
 		}
 	}
-	
-	
+
+	/**
+	 * 更新发布状态
+	 * 
+	 * @param id
+	 * @param publicState
+	 * @return
+	 */
+	@PutMapping("/bookpublic")
+	public Msg updateState(Integer id, Boolean publicState) {
+		if (adminBookService.updateBookPublic(id, publicState) == 1) {
+			return Msg.success().add("result", "更新成功");
+		} else {
+			return Msg.fail().add("result", "更新失败");
+		}
+	}
 
 }

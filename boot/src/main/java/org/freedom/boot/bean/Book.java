@@ -12,27 +12,28 @@ import javax.validation.constraints.Pattern;
 public class Book implements Serializable {
 	private Integer bookId;
 
-	@NotBlank(message="名称不能为空")
+	@NotBlank(message = "名称不能为空")
 	private String bookName;
 
 	@Min(0)
 	private BigDecimal bookPrice;
 
 	private Integer bookTypeId;
-	 
+
 	@Min(0)
 	private Integer bookCount;
 
-	@NotBlank(message="作者不能为空")
+	@NotBlank(message = "作者不能为空")
 	private String bookAuthor;
 
 	private Integer shopId;
 
-	@NotBlank(message="不能为空")
+	@NotBlank(message = "不能为空")
 	private String bookCover;
 
-	 
 	private BookType bookType;
+
+	private Boolean ifPublic;
 
 	public Book() {
 		super();
@@ -50,6 +51,14 @@ public class Book implements Serializable {
 		this.bookAuthor = bookAuthor;
 		this.shopId = shopId;
 		this.bookCover = bookCover;
+	}
+
+	public Boolean getIfPublic() {
+		return ifPublic;
+	}
+
+	public void setIfPublic(Boolean ifPublic) {
+		this.ifPublic = ifPublic;
 	}
 
 	public BookType getBookType() {

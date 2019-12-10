@@ -614,6 +614,11 @@ public class BookExample {
             addCriterion("book_cover not between", value1, value2, "bookCover");
             return (Criteria) this;
         }
+        
+        public Criteria andIfPublicEqualTo(Integer value) {
+            addCriterion("tbl_book.if_public =", value, "ifPublic");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

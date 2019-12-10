@@ -10,6 +10,7 @@
 		<result column="book_author" jdbcType="VARCHAR" property="bookAuthor" />
 		<result column="shop_id" jdbcType="INTEGER" property="shopId" />
 		<result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
+		<result column="if_public" jdbcType="BIT" property="ifPublic" />
 	</resultMap>
 	<resultMap extends="ResultMapWithType" id="ResultMapWithBLOBs"
 		type="org.freedom.boot.bean.BookWithBLOBs">
@@ -26,6 +27,7 @@
 		<result column="book_count" jdbcType="INTEGER" property="bookCount" />
 		<result column="book_author" jdbcType="VARCHAR" property="bookAuthor" />
 		<result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
+		<result column="if_public" jdbcType="BIT" property="ifPublic" />
 		<association property="bookType" column="book_type_id"
 			javaType="org.freedom.boot.bean.BookType">
          <id column="book_type_id" property="bookTypeId"/>
@@ -105,7 +107,7 @@
 	<sql id="Base_Column_List">
 		book_id, book_name, book_price, book_type_id, book_count,
 		book_author,
-		shop_id, book_cover
+		shop_id, book_cover,if_public
 	</sql>
 	<sql id="Blob_Column_List">
 		book_detail, book_img, detail_img
@@ -125,6 +127,7 @@
 		`book_detail`,
 		`tbl_book`.`book_type_id` AS `book_type_id`,
 		`tbl_book`.`book_count` AS `book_count`,
+		`tbl_book`.`if_public` AS `if_public`,
 		`tbl_book_type`.type_name AS `book_type_name`
 	</sql>
 
@@ -254,6 +257,9 @@
 			<if test="detailImg != null">
 				detail_img,
 			</if>
+			<if test="ifPublic != null">
+				if_public,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="bookId != null">
@@ -288,6 +294,9 @@
 			</if>
 			<if test="detailImg != null">
 				#{detailImg,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="ifPublic != null">
+				#{ifPublic,jdbcType=BIT},
 			</if>
 		</trim>
 	</insert>
@@ -418,6 +427,12 @@
 			<if test="detailImg != null">
 				detail_img = #{detailImg,jdbcType=LONGVARCHAR},
 			</if>
+			<if test="detailImg != null">
+				detail_img = #{detailImg,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="ifPublic != null">
+				if_public = #{ifPublic,jdbcType=BIT},
+			</if>
 		</set>
 		where book_id = #{bookId,jdbcType=INTEGER}
 	</update>
@@ -439,6 +454,8 @@
 		#{bookDetail,jdbcType=LONGVARCHAR},
 		book_img =
 		#{bookImg,jdbcType=LONGVARCHAR},
+		if_public =
+		#{ifPublic,jdbcType=BIT},
 		detail_img =
 		#{detailImg,jdbcType=LONGVARCHAR}
 		where book_id =
@@ -456,6 +473,8 @@
 		#{bookCount,jdbcType=INTEGER},
 		book_author =
 		#{bookAuthor,jdbcType=VARCHAR},
+		if_public =
+		#{ifPublic,jdbcType=BIT},
 		shop_id = #{shopId,jdbcType=INTEGER},
 		book_cover = #{bookCover,jdbcType=VARCHAR}
 		where book_id =

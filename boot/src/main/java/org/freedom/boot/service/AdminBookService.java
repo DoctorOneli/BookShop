@@ -28,7 +28,7 @@ public class AdminBookService {
 	 * 
 	 * @return
 	 */
-	public List<Book> getBookList(Integer typeId) {
+	public List<Book> getBookList(Integer typeId,Integer publicState) {
 
 		BookExample bookExample = new BookExample();
 		Criteria criteria = bookExample.createCriteria();
@@ -36,6 +36,12 @@ public class AdminBookService {
 		if (typeId != 0) {
 			criteria.andBookTypeIdEqualTo(typeId);
 		}
+		
+		if(publicState!=-1)
+		{
+			criteria.andIfPublicEqualTo(publicState);
+		}
+		
 
 		bookExample.setOrderByClause("book_count DESC");
 		return bookMapper.selectByExampleWithType(bookExample);
@@ -49,17 +55,13 @@ public class AdminBookService {
 	 * @param condition
 	 * @return
 	 */
-	public List<Book> getBookListById(Integer typeId, String condition) {
+	public List<Book> getBookListById(String condition) {
 
 		BookExample bookExample = new BookExample();
 		Criteria criteriaBookId = bookExample.createCriteria();
 
 		if (condition != "") {
 			criteriaBookId.andBookIdEqualTo(Integer.valueOf(condition));
-		}
-
-		if (typeId != 0) {
-			criteriaBookId.andBookTypeIdEqualTo(typeId);
 		}
 
 		bookExample.setOrderByClause("book_count DESC");
@@ -75,17 +77,12 @@ public class AdminBookService {
 	 * @param condition
 	 * @return
 	 */
-	public List<Book> getBookListByName(Integer typeId, String condition) {
+	public List<Book> getBookListByName(String condition) {
 
 		BookExample bookExample = new BookExample();
 		Criteria criteriaBookName = bookExample.createCriteria();
 		if (condition != "") {
 			criteriaBookName.andBookNameLike("%" + condition + "%");
-		}
-
-		if (typeId != 0) {
-
-			criteriaBookName.andBookTypeIdEqualTo(typeId);
 		}
 
 		bookExample.setOrderByClause("book_count DESC");
@@ -179,6 +176,26 @@ public class AdminBookService {
 	public int addBookType(BookType type) {
 		return bookTypeMapper.insertSelective(type);
 
+	}
+
+	/**
+	 * 更新发布状态
+	 * @param id
+	 * @param publicState
+	 * @return
+	 */
+	public int updateBookPublic(Integer id,Boolean publicState) {
+		BookWithBLOBs book=bookMapper.selectByPrimaryKey(id);
+		book.setIfPublic(publicState);
+		
+		if(bookMapper.updateByPrimaryKeySelective(book)==1)
+		{
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	
 	}
 
 }

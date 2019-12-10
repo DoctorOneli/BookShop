@@ -16,7 +16,7 @@ server:
 upload:
   path:
     #正式目录
-    formal: D:/java/         #D:/java/(windows路径)      
+    formal: /usr/java/         #D:/java/(windows路径)      
    
 
 #Linux环境的目录
@@ -44,8 +44,6 @@ spring:
 #缓存配置      
   cache:
     type: redis
-    cache-names:
-      - book
     redis:
       time-to-live: 1800s
 
