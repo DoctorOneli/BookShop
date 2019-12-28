@@ -12,6 +12,7 @@ import org.freedom.boot.bean.BookExample.Criteria;
 import org.freedom.boot.dao.BookMapper;
 import org.freedom.boot.dao.BookTypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,6 +29,7 @@ public class AdminBookService {
 	 * 
 	 * @return
 	 */
+	 
 	public List<Book> getBookList(Integer typeId,Integer publicState) {
 
 		BookExample bookExample = new BookExample();

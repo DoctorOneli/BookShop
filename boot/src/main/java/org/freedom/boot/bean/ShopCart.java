@@ -10,6 +10,8 @@ public class ShopCart {
     private Integer bookId;
 
     private Integer count;
+    
+    private Book book;
 
     private Date createTime;
 

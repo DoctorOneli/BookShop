@@ -10,8 +10,19 @@ public class Collect {
     private Integer userId;
 
     private Date createTime;
+    
+    private Book book;
+    
+    public Book getBook() {
+		return book;
+	}
 
-    public Integer getCollectId() {
+	public void setBook(Book book) {
+		this.book = book;
+	}
+ 
+
+	public Integer getCollectId() {
         return collectId;
     }
 

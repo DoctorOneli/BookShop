@@ -30,8 +30,13 @@
 		<result column="if_public" jdbcType="BIT" property="ifPublic" />
 		<association property="bookType" column="book_type_id"
 			javaType="org.freedom.boot.bean.BookType">
-         <id column="book_type_id" property="bookTypeId"/>
-         <result column="book_type_name"  property="typeName" />
+        	<result column="book_name" jdbcType="VARCHAR" property="bookName" />
+		<result column="book_price" jdbcType="DECIMAL" property="bookPrice" />
+		<result column="book_type_id" jdbcType="INTEGER" property="bookTypeId" />
+		<result column="book_count" jdbcType="INTEGER" property="bookCount" />
+		<result column="book_author" jdbcType="VARCHAR" property="bookAuthor" />
+		<result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
+		<result column="if_public" jdbcType="BIT" property="ifPublic" />
 		</association>
 
 	</resultMap>

@@ -356,5 +356,15 @@ public class AdminBookController {
 			return Msg.fail().add("result", "更新失败");
 		}
 	}
+	
+	 
+	@DeleteMapping("/evaluate/{id}")
+	public Msg deleteEvaluate(@PathVariable("id") Integer id) {
+		if (adminEvaluateService.deleteEvaluate(id)>0) {
+			return Msg.success().add("result", "删除成功");
+		} else {
+			return Msg.fail().add("result", "删除失败");
+		}
+	}
 
 }

@@ -236,7 +236,7 @@ public class CollectExample {
         }
 
         public Criteria andUserIdEqualTo(Integer value) {
-            addCriterion("user_id =", value, "userId");
+            addCriterion("tbl_collect.user_id =", value, "userId");
             return (Criteria) this;
         }
 

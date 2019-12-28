@@ -56,6 +56,7 @@ E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\EvaluateLike.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\UserInfoMapper.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\controller\AdminOrderController.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\dao\CollectMapper.java
+E:\BookShopGit\boot\src\main\java\org\freedom\boot\controller\AdminCommonController.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\AreaExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\EvaluateLikeExample.java
 E:\BookShopGit\boot\src\main\java\org\freedom\boot\bean\PowerExample.java
